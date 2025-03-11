@@ -1,0 +1,31 @@
+{
+  "name": "burak",
+  "version": "1.0.0",
+  "description": "This is burak backend project ",
+  "main": "src/server.ts",
+  "scripts": {
+    "start": "ts-node src/server.ts",
+    "start-dev": "nodemon -- exes ts-node src/server.ts",
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "train": "nodemon train.ts"
+  },
+  "author": "Shohinur",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.17.3",
+    "moment": "^2.29.4",
+    "mongodb": "^3.2.6",
+    "mongoose": "^6.2.9"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/moment": "^2.11.29",
+    "nodemon": "^3.0.2",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.2.2"
+  }
+}
