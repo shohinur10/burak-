@@ -16,7 +16,7 @@
     "food",
     "backend"
   ],
-  "author": "oliver",
+  "author": "shohinur",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^3.1.9",
