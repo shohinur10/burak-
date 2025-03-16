@@ -1,3 +1,46 @@
+// Task I 
+// shunday function tuzing, u parametrdagi array ichida eng ko'p
+// takrorlangan raqamni topib qaytarsin.
+
+// MASALAN: majorityElement([1, 2, 3, 4, 5, 4, 3, 4]); return 4
+
+// Yuqoridag misolda argument sifatida kiritilayotgan array tarkibida 4 soni ko'p takrorlanganligi uchun 4'ni return qilmoqda.
+
+function majorityElement(arr: number[]): number {
+    let countMap = new Map<number, number>();
+    let maxCount = 0;
+    let maxElement: number | null = null;
+
+    for (let num of arr) {
+        let count = (countMap.get(num) || 0) + 1;
+        countMap.set(num, count);
+        
+        if (count > maxCount) {
+            maxCount = count;
+            maxElement = num;
+        }
+    }
+
+    return maxElement!;
+}
+
+// Test
+console.log(majorityElement([1, 2, 3, 4, 5, 4, 3, 4])); // Output: 4
+
+// countMap nomli xarita yaratib, har bir elementning necha marta uchraganligini saqlaydi.
+
+// Eng ko‘p takrorlangan elementni topish uchun maxCount va maxElement o‘zgaruvchilaridan foydalanadi.
+
+// Har bir element uchun takrorlanish sonini yangilaydi va agar yangi maksimal qiymat topilsa, uni maxElement sifatida saqlaydi.
+
+
+
+
+
+
+
+
+
 // TASK H:
 
 // Integerlardan iborat arrayni argument sifatida qabul qiladigan
@@ -7,14 +50,14 @@
 // -4 positive emas negative number bo'lganligi uchun
 // uni ignore qilib qolganlarini birlashtirib string ko'rinishadi qaytarmoqda
 
-function getPositiveH(arr: number[]): string {
-    return arr.filter(num => num > 0).join('');
-}
+// function getPositiveH(arr: number[]): string {
+//     return arr.filter(num => num > 0).join('');
+// }
 
-// Test cases
-console.log(getPositiveH([1, -4, 2]));  // "12"
-console.log(getPositiveH([-3, 5, 0, 9]));  // "59"
-console.log(getPositiveH([-7, -2, -1]));  // ""
+// // Test cases
+// console.log(getPositiveH([1, -4, 2]));  // "12"
+// console.log(getPositiveH([-3, 5, 0, 9]));  // "59"
+// console.log(getPositiveH([-7, -2, -1]));  // ""
 
 
 

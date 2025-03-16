@@ -1,6 +1,6 @@
 import mongoose, {Schema} from "mongoose";
 import { MemberStatus, MemberType } from "../libs/enums/member.enum";
-import default from '../controllers/member.controllers';
+
 
 
 // Schema first and Code first
@@ -56,7 +56,7 @@ const memberSchema = new Schema({
     },
 
 },
-   { timestamps:true}:   // updateAt createAt
+   { timestamps:true}  // updateAt createAt
 );
 
 
