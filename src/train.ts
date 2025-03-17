@@ -6,26 +6,26 @@
 
 // Yuqoridag misolda argument sifatida kiritilayotgan array tarkibida 4 soni ko'p takrorlanganligi uchun 4'ni return qilmoqda.
 
-function majorityElement(arr: number[]): number {
-    let countMap = new Map<number, number>();
-    let maxCount = 0;
-    let maxElement: number | null = null;
+// function majorityElement(arr: number[]): number {
+//     let countMap = new Map<number, number>();
+//     let maxCount = 0;
+//     let maxElement: number | null = null;
 
-    for (let num of arr) {
-        let count = (countMap.get(num) || 0) + 1;
-        countMap.set(num, count);
+//     for (let num of arr) {
+//         let count = (countMap.get(num) || 0) + 1;
+//         countMap.set(num, count);
         
-        if (count > maxCount) {
-            maxCount = count;
-            maxElement = num;
-        }
-    }
+//         if (count > maxCount) {
+//             maxCount = count;
+//             maxElement = num;
+//         }
+//     }
 
-    return maxElement!;
-}
+//     return maxElement!;
+// }
 
-// Test
-console.log(majorityElement([1, 2, 3, 4, 5, 4, 3, 4])); // Output: 4
+// // Test
+// console.log(majorityElement([1, 2, 3, 4, 5, 4, 3, 4])); // Output: 4
 
 // countMap nomli xarita yaratib, har bir elementning necha marta uchraganligini saqlaydi.
 

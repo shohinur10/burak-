@@ -5,7 +5,8 @@
 // //MVC - MODEL VIEW CONTROLLER
 
 // //design paterns: middlewares, decorators 
-
+//async type
+// mongoose qulayroq crud amallarini qurish  va collectionlardi hosil qilish uchun ishlatiladi 
 import dotenv from "dotenv";
 dotenv.config();
 import mongoose from "mongoose";
@@ -21,3 +22,4 @@ mongoose
     });
 })
 .catch((err)=> console.log("ERROR on connnection MongoDB", err));
+// cluster => database => collection=> document => dataSet 
