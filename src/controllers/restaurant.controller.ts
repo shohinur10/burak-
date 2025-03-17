@@ -10,6 +10,7 @@ restaurantController.goHome =(req: Request, res: Response) =>{
       //  logic
       // service model 
     res.send("Home Page");
+    //send/json /redirect/end / render  type of resond 
       }  catch (err){
         console.log("Error, goHome:", err);
       }
@@ -24,13 +25,32 @@ restaurantController.getLogin =(req: Request, res: Response) =>{
       }
 };
 
-restaurantController.getSignup =(req: Request, res: Response) =>{
+restaurantController.processLogin =(req: Request, res: Response) =>{
     try{
-      console.log("getSignup")
-    res.send("Signup  Page");
+      console.log("processLogin")
+      res.send("Done")
+
       }  catch (err){
-        console.log("Error, getSignup:", err);
+        console.log("Error, processLogin", err);
       }
+      };
+
+      restaurantController.processSignup=(req: Request, res: Response) =>{
+        try{
+          console.log("processSignup")
+        res.send(" Done");
+          }  catch (err){
+            console.log("Error, processSignup:", err);
+          }
+          };
+    
+restaurantController.getSignup=(req: Request, res: Response) =>{
+  try{
+    console.log("getSignup")
+  res.send("Signup Page");
+    }  catch (err){
+      console.log("Error, getSignup:", err);
+    }
 };
 
 export  default restaurantController;
