@@ -1,3 +1,23 @@
+// J-TASK: 
+
+// Shunday function yozing, u string qabul qilsin va string ichidagi eng uzun sozni qaytarsin.
+// MASALAN: findLongestWord("I come from Uzbekistan") return "Uzbekistan"
+function findLongestWord(sentence: string): string {
+    const words = sentence.split(' '); // Stringni so'zlarga ajratish
+    let longestWord = '';
+
+    for (const word of words) {
+        if (word.length > longestWord.length) {
+            longestWord = word; // Eng uzun so'zni yangilash
+        }
+    }
+
+    return longestWord;
+}
+
+console.log(findLongestWord("I come from Uzbekistan"));  // "Uzbekistan"
+
+
 // Task I 
 // shunday function tuzing, u parametrdagi array ichida eng ko'p
 // takrorlangan raqamni topib qaytarsin.
