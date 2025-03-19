@@ -55,7 +55,7 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
     res.send("Signup successful");
   } catch (err) {
     console.log("Error, processSignup:", err);
-    res.status(500).send("Error processing signup");
+    res.send(err);
   }
 };
 
@@ -65,7 +65,7 @@ restaurantController.getSignup = (req: Request, res: Response) => {
     res.send("Signup Page");
   } catch (err) {
     console.log("Error, getSignup:", err);
-    res.status(500).send("Internal Server Error");
+    res.status(500).send("Error processing signup");
   }
 };
 
