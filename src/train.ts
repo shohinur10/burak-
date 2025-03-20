@@ -1,21 +1,40 @@
+//  Task -H ,String argument pass bo'ladigan function tuzing.
+// Ushbu function argument tarkibidagi digit(son)larni topib yangi stringda return qilsin
+
+// MASALAN: getDigits("m14i1t"); return qiladi "141"
+
+
+
+function getDigits(inputString: string): string {
+    let digits = '';
+    for (let i = 0; i < inputString.length; i++) {
+        if (!isNaN(Number(inputString[i])) && inputString[i] !== ' ') {
+            digits += inputString[i];
+        }
+    }
+    return digits;
+}
+const result = getDigits("m14i1t");
+console.log(result);
+
 // J-TASK: 
 
 // Shunday function yozing, u string qabul qilsin va string ichidagi eng uzun sozni qaytarsin.
 // MASALAN: findLongestWord("I come from Uzbekistan") return "Uzbekistan"
-function findLongestWord(sentence: string): string {
-    const words = sentence.split(' '); // Stringni so'zlarga ajratish
-    let longestWord = '';
+// function findLongestWord(sentence: string): string {
+//     const words = sentence.split(' '); // Stringni so'zlarga ajratish
+//     let longestWord = '';
 
-    for (const word of words) {
-        if (word.length > longestWord.length) {
-            longestWord = word; // Eng uzun so'zni yangilash
-        }
-    }
+//     for (const word of words) {
+//         if (word.length > longestWord.length) {
+//             longestWord = word; // Eng uzun so'zni yangilash
+//         }
+//     }
 
-    return longestWord;
-}
+//     return longestWord;
+// }
 
-console.log(findLongestWord("I come from Uzbekistan"));  // "Uzbekistan"
+// console.log(findLongestWord("I come from Uzbekistan"));  // "Uzbekistan"
 
 
 // Task I 
