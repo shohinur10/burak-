@@ -10,7 +10,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'public'))); // Middleware Design Pattern => public API
 app.use(express.urlencoded({ extended: true }));  // Middleware Design Pattern => Traditional API
 app.use(express.json());  // Middleware Design Pattern => Rest API
-app.use(morgan(MORGAN_FORMAT));
+app.use(morgan(MORGAN_FORMAT)); // har bir  htpp faylgan jonatilgan log uchun ketgan vaqtdi console,logda korsatadi 
 // 2- Session
 
 // 3- Views 

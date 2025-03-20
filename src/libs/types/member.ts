@@ -24,4 +24,8 @@ _id: ObjectId;
     memberPoint: number; // Optional
     createAt: Date; // Required
     updatedAt: Date; // Optional (corrected from 'updete')
+} 
+export interface LoginInput {
+    memberNick:string;
+    memberPassword:string;
 }
