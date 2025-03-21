@@ -13,20 +13,20 @@ restaurantController.goHome = (req: Request, res: Response) => {
     res.send("Home Page");
   } catch (err) {
     console.log("Error, goHome:", err);
-    res.status(500).send("Internal Server Error"); // Return a proper error message
+    res.send(err); // Return a proper error message
   }
 };
-
 restaurantController.getLogin = (req: Request, res: Response) => {
   try {
     console.log("getLogin");
-    res.send("Login Page");
+    res.send("login"); // This should render the login.ejs view
   } catch (err) {
     console.log("Error, getLogin:", err);
-    res.status(500).send("Internal Server Error");
+    res.send(err);
   }
 };
 
+// Process login
 restaurantController.processLogin = async (req: Request, res: Response) => {
   try {
     console.log("processLogin");
@@ -34,14 +34,12 @@ restaurantController.processLogin = async (req: Request, res: Response) => {
     const input: LoginInput = req.body;
 
     const memberService = new MemberService();
+    const result = await memberService.processLogin(input);
 
-     const result = await memberService.processLogin(input)
-
-    // Implement login logic (check credentials, etc.)
     res.send(result);
   } catch (err) {
     console.log("Error, processLogin:", err);
-    res.status(500).send("Internal Server Error");
+    res.send(err);
   }
 };
 
@@ -59,7 +57,7 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
     const result = await memberService.processSignup(newMember); 
 
     // Handle the result and send a response accordingly
-    res.send("Signup successful");
+    res.send(result);
   } catch (err) {
     console.log("Error, processSignup:", err);
     res.send(err);
@@ -72,7 +70,7 @@ restaurantController.getSignup = (req: Request, res: Response) => {
     res.send("Signup Page");
   } catch (err) {
     console.log("Error, getSignup:", err);
-    res.status(500).send("Error processing signup");
+    res.send(err);
   }
 };
 
