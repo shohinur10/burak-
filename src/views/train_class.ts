@@ -10,6 +10,15 @@
 */
 
 
+/*
+Traditional frontend development => BSSR (Adminka )=> EJS
+Modern frontend development => SPA =>( Users app) REACT library 
+*/
+
+
+
+
+
 // browser faqatgina get req qabul qiladu 
 // get faqatgina qandeydir malumotdi olish uchun ishlatilsa 
 // post qandeydir malumotdi ozgartirish  uchun ishlatiladi 

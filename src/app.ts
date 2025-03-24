@@ -18,8 +18,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // 4- Routing 
-app.use("/", router);// SPA - single page application : REACT  loyihamizda REST API korinishida ishlatamiuz  public uchun 
 app.use("/admin", routerAdmin);//SSR = Service Site Rendining : EJS admin uchun 
+app.use("/", router);// SPA - single page application : REACT  loyihamizda REST API korinishida ishlatamiuz  public uchun  
 
 
 export default app;
