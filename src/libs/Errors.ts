@@ -1,38 +1,37 @@
 export enum HttpCode {
-    Ok =200,
-    CREATED =201,
-    NOT_MODIFIED =304,
-    BAD_REQUEST =400,
+    OK = 200,
+    CREATED = 201,
+    NOT_MODIFIED = 304,
+    BAD_REQUEST = 400,
     UNAUTHORIZED = 401,
-    FORBIDDEN =403,
+    FORBIDDEN = 403,
     NOT_FOUND = 404,
     INTERNAL_SERVER_ERROR = 500,
 }
 
-
-export enum Message{
-    SOMETHING_WENT_WORNG = "SOMETHUING WENT WRONG!",
-    NO_DATA_FOUND = "NO DATA IS FOUND!",
-    CREATED_FAILED = "CREATED IS FAILDE!",
-    UPDATED_FAILED = "UPDATED IS FAILED!",
-    USED_NICK_PHONE ="Yoy are inserting already used nick or phone",
-    NO_MEMBER_NICK = " No member with that number nick",
-    WRONG_PASWWORD ="Wrong password",
+export enum Message {
+    SOMETHING_WENT_WRONG = "SOMETHING WENT WRONG!",
+    NO_DATA_FOUND = "NO DATA FOUND!",
+    CREATION_FAILED = "CREATION FAILED!",
+    UPDATE_FAILED = "UPDATE FAILED!",
+    USED_NICK_PHONE = "You are inserting an already used nickname or phone number.",
+    NO_MEMBER_NICK = "No member with that nickname or number.",
+    WRONG_PASSWORD = "Wrong password",
 }
- class Errors extends Error{
-    public code : HttpCode;
-    public message : Message;
 
-    static standard = {
-        code : HttpCode.INTERNAL_SERVER_ERROR,
-        message : Message.SOMETHING_WENT_WORNG,
+class Errors extends Error {
+    public code: HttpCode;
+
+    constructor(statusCode: HttpCode, statusMessage: Message) {
+        super(statusMessage);
+        this.code = statusCode;
+        this.message = statusMessage;
     }
-    constructor(statusCode: HttpCode, statusMessage: Message){
-        super();
-         this.code = statusCode;
-         this.message =statusMessage;
 
+    // Standart xatoni qaytaruvchi method
+    static (): Errors {
+        return new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.SOMETHING_WENT_WRONG);
     }
- }
+}
 
- export default Errors;
+export default Errors;

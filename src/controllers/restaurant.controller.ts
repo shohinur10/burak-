@@ -13,24 +13,30 @@ restaurantController.goHome = (req: Request, res: Response) => {
   try {
     console.log("goHome"); // Log for server-side info
     // Add any business logic here
-    res.send("Home Page");
+    res.render("home");
     //send / json / redirect / end /render data jonatish turlari 
   } catch (err) {
     console.log("Error, goHome:", err);
-    res.send(err); // Return a proper error message
   }
 };
 
 restaurantController.getSignup = (req: Request, res: Response) => {
   try {
     console.log("getSignup");
-    res.send("Signup Page");
+    res.render("Signup Page");
   } catch (err) {
     console.log("Error, getSignup:", err);
-    res.send(err);
+  }
+}
+restaurantController.getLogin = (req: Request, res: Response) => {
+  try {
+    console.log("getLogin");
+    res.render("login"); // This should render the login.ejs view
+  } catch (err) {
+    console.log("Error, getLogin:", err);
+    ;
   }
 };
-
 restaurantController.processSignup = async (req: Request, res: Response) => {
   try {
     console.log("processSignup");
@@ -40,21 +46,12 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
 // bu loyihamizda admin restaurant 
     
     // Assuming processSignup method needs member data to sign up
-    const result = await memberService.processSignup(newMember); 
+    const result = await memberService.signup(newMember); 
 
     // Handle the result and send a response accordingly
     res.send(result);
   } catch (err) {
     console.log("Error, processSignup:", err);
-    res.send(err);
-  }
-};
-restaurantController.getLogin = (req: Request, res: Response) => {
-  try {
-    console.log("getLogin");
-    res.send("login"); // This should render the login.ejs view
-  } catch (err) {
-    console.log("Error, getLogin:", err);
     res.send(err);
   }
 };
@@ -65,7 +62,7 @@ restaurantController.processLogin = async (req: Request, res: Response) => {
     console.log("processLogin");
     console.log("body:", req.body);
     const input: LoginInput = req.body;
-    const result = await memberService.processLogin(input);
+    const result = await memberService.login(input);
 
     res.send(result);
   } catch (err) {
