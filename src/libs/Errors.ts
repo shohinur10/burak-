@@ -14,6 +14,7 @@ export enum Message {
     NO_DATA_FOUND = "NO DATA FOUND!",
     CREATION_FAILED = "CREATION FAILED!",
     UPDATE_FAILED = "UPDATE FAILED!",
+
     USED_NICK_PHONE = "You are inserting an already used nickname or phone number.",
     NO_MEMBER_NICK = "No member with that nickname or number.",
     WRONG_PASSWORD = "Wrong password",
@@ -21,16 +22,18 @@ export enum Message {
 
 class Errors extends Error {
     public code: HttpCode;
+    public message: Message;
+    
+static standard ={
+    code: HttpCode.INTERNAL_SERVER_ERROR,
+    message: Message.SOMETHING_WENT_WRONG
+};
 
     constructor(statusCode: HttpCode, statusMessage: Message) {
-        super(statusMessage);
+        super();
         this.code = statusCode;
         this.message = statusMessage;
-    }
-
-    // Standart xatoni qaytaruvchi method
-    static (): Errors {
-        return new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.SOMETHING_WENT_WRONG);
+    
     }
 }
 

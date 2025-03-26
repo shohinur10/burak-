@@ -11,8 +11,7 @@ const restaurantController: T = {};
 
 restaurantController.goHome = (req: Request, res: Response) => {
   try {
-    console.log("goHome"); // Log for server-side info
-    // Add any business logic here
+    console.log("goHome");
     res.render("home");
     //send / json / redirect / end /render data jonatish turlari 
   } catch (err) {
@@ -42,13 +41,11 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
     console.log("processSignup");
 
     const newMember: MemberInput = req.body;
-    newMember.memberType = MemberType.RESTAURANT; // Set the member type to RESTAURANT
-// bu loyihamizda admin restaurant 
+    newMember.memberType = MemberType.RESTAURANT;
     
-    // Assuming processSignup method needs member data to sign up
-    const result = await memberService.signup(newMember); 
+    const result = await memberService.processSignup(newMember); 
 
-    // Handle the result and send a response accordingly
+  
     res.send(result);
   } catch (err) {
     console.log("Error, processSignup:", err);
@@ -56,13 +53,12 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
   }
 };
 
-// Process login
 restaurantController.processLogin = async (req: Request, res: Response) => {
   try {
     console.log("processLogin");
     console.log("body:", req.body);
     const input: LoginInput = req.body;
-    const result = await memberService.login(input);
+    const result = await memberService.processLogin(input);
 
     res.send(result);
   } catch (err) {
