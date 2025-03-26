@@ -3,7 +3,9 @@ import { T } from "../libs/types/common";
 import { LoginInput, MemberInput } from '../libs/types/member';
 import { MemberType } from "../libs/enums/member.enum";
 import MemberService from "../models/Member.service";
+import Errors from "../libs/Errors";
 
+// BSSR - uchun adminka loyihamiz uchun   
 
 const memberService = new MemberService();
 
@@ -22,7 +24,7 @@ restaurantController.goHome = (req: Request, res: Response) => {
 restaurantController.getSignup = (req: Request, res: Response) => {
   try {
     console.log("getSignup");
-    res.render("Signup Page");
+    res.render("signup");
   } catch (err) {
     console.log("Error, getSignup:", err);
   }
@@ -39,10 +41,10 @@ restaurantController.getLogin = (req: Request, res: Response) => {
 restaurantController.processSignup = async (req: Request, res: Response) => {
   try {
     console.log("processSignup");
+    console.log("body", req.body);
 
     const newMember: MemberInput = req.body;
     newMember.memberType = MemberType.RESTAURANT;
-    
     const result = await memberService.processSignup(newMember); 
 
   
@@ -56,15 +58,18 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
 restaurantController.processLogin = async (req: Request, res: Response) => {
   try {
     console.log("processLogin");
-    console.log("body:", req.body);
-    const input: LoginInput = req.body;
+    console.log("body",req.body);
+    
+   // const input: LoginInput = req.body;
+   const input =req.body as unknown as LoginInput;
     const result = await memberService.processLogin(input);
 
     res.send(result);
-  } catch (err) {
+  } catch (err: any) {
     console.log("Error, processLogin:", err);
     res.send(err);
   }
 };
+
 
 export default restaurantController;

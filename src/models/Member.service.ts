@@ -13,47 +13,46 @@ class MemberService {
 
   /** SPA Signup */
   public async signup(input: MemberInput): Promise<Member> {
-    const exist = await this.memberModel
-      .findOne({ memberType: MemberType.RESTAURANT })
-      .exec();
-    
-    if (exist) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATED_FAILED);
-
-    const salt = await bcrypt.genSalt();
+    const salt = await bcrypt.genSalt(); 
     input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
 
     try {
       const result = await this.memberModel.create(input);
       result.memberPassword = ""; // Hide password before returning
-      return result.toObject() as Member;
+      return result.toJSON() as Member;
     } catch (err) {
-      throw new Errors(HttpCode.BAD_REQUEST, Message.CREATED_FAILED);
+      console.log("Error , model:signup", err);
+      throw new Errors(HttpCode.BAD_REQUEST, Message.USED_NICK_PHONE);
     }
   }
 
   /** SPA Login */
   public async login(input: LoginInput): Promise<Member> {
+    // TODO: Consider member status later
     const member = await this.memberModel
       .findOne(
         { memberNick: input.memberNick },
         { memberNick: 1, memberPassword: 1 }
       )
       .exec();
-    
+  
     if (!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
-
+  
     const isMatch = await bcrypt.compare(input.memberPassword, member.memberPassword);
-    if (!isMatch) throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASWWORD);
-
+    if (!isMatch) 
+      throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASWWORD);
     const foundMember = await this.memberModel
-      .findById(member._id)
-      .select("memberNick memberType memberStatus memberPoints createdAt updatedAt") // Ensure all required fields are selected
-      .exec();
+    .findById(member._id)
+    .select("memberNick memberType memberStatus memberPoints createdAt updatedAt") // Ensure all required fields are selected
+    .exec();
 
-    if (!foundMember) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
+  if (!foundMember) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
 
-    return foundMember.toObject() as Member;
-  }
+  return foundMember.toObject() as Member;
+}
+  
+    
+    
 
   /** SSR Signup */
   public async processSignup(input: MemberInput): Promise<Member> {
@@ -76,28 +75,24 @@ class MemberService {
   }
 
   /** SSR Login */
-  public async processLogin(input: LoginInput): Promise<Member> {
-    const member = await this.memberModel
-      .findOne(
-        { memberNick: input.memberNick },
-        { memberNick: 1, memberPassword: 1 }
-      )
-      .exec();
-    
-    if (!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
+  public async processLogin(input:LoginInput): Promise<Member>{
+    const member= await this.memberModel
+    .findOne({memberNick: input.memberNick},
+    {memberNick:1, memberPassword:1})
+    .exec();
 
+    if(!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
     const isMatch = await bcrypt.compare(input.memberPassword, member.memberPassword);
-    if (!isMatch) throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASWWORD);
+    // const isMatch = input.memberPassword === member.memberPassword;
+    if(!isMatch) throw new Errors(HttpCode.BAD_REQUEST, Message.WRONG_PASWWORD);
 
-    const foundMember = await this.memberModel
-      .findById(member._id)
-      .select("memberNick memberType memberStatus memberPoints createdAt updatedAt") // Ensure all required fields are selected
-      .exec();
+      
 
-    if (!foundMember) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
-
-    return foundMember.toObject() as Member;
+    const result = await this.memberModel.findById(member._id).exec();
+    if (!result) {
+      throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
+    }
+    return result.toObject as unknown as Member;
   }
 }
-
 export default MemberService;

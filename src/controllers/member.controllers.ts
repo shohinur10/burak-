@@ -3,16 +3,18 @@ import { T } from "../libs/types/common";
 import { MemberInput,Member,LoginInput } from "../libs/types/member";
 import MemberService from "../models/Member.service";
 
+// REACT uchun ishleydu togrirogi SPA
 
+ const memberService = new MemberService();
+ // prject dovomida memberServicesdan kop instance olganimiz uchun unu tashaqari chiqariboldik
 
 const memberController: T = {};
 
 memberController.signup = async (req: Request, res: Response) => {
   try {
     console.log("signup");
-   const input : MemberInput = req.body
-   const memberService = new MemberService();
-    const result: Member  = await memberService.signup(input);
+   const input : MemberInput = req.body,
+     result: Member  = await memberService.signup(input);
 
 
     res.json({member: result});
@@ -26,9 +28,8 @@ memberController.signup = async (req: Request, res: Response) => {
 memberController.login = async (req: Request, res: Response) => {
   try {
     console.log("login");
-    const input: LoginInput = req.body;
-    const memberService = new MemberService();
-    const result = await memberService.login(input);
+    const input: LoginInput = req.body,
+    result = await memberService.login(input);
   
     res.json({member: result});
   } catch (err) {
