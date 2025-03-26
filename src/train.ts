@@ -1,3 +1,17 @@
+function countVowels(s: string): number {
+    const vowels = "aeiouAEIOU";
+    return Array.from(s).filter(char => vowels.includes(char)).length;
+}
+
+// Test
+console.log(countVowels("string"));  // Output: 1
+console.log(countVowels("hello"));   // Output: 2
+
+
+
+
+
+
 //  Task -H ,String argument pass bo'ladigan function tuzing.
 // Ushbu function argument tarkibidagi digit(son)larni topib yangi stringda return qilsin
 
@@ -5,17 +19,17 @@
 
 
 
-function getDigits(inputString: string): string {
-    let digits = '';
-    for (let i = 0; i < inputString.length; i++) {
-        if (!isNaN(Number(inputString[i])) && inputString[i] !== ' ') {
-            digits += inputString[i];
-        }
-    }
-    return digits;
-}
-const result = getDigits("m14i1t");
-console.log(result);
+// function getDigits(inputString: string): string {
+//     let digits = '';
+//     for (let i = 0; i < inputString.length; i++) {
+//         if (!isNaN(Number(inputString[i])) && inputString[i] !== ' ') {
+//             digits += inputString[i];
+//         }
+//     }
+//     return digits;
+// }
+// const result = getDigits("m14i1t");
+// console.log(result);
 
 // J-TASK: 
 
