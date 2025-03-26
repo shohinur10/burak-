@@ -22,5 +22,6 @@ mongoose
         console.info(`Admin project on http://localhost:${PORT}/admin \n`);
     });
 })
-.catch((err)=> console.log("ERROR on connnection MongoDB", err));
+.catch((err)=> { console.log("ERROR on connnection MongoDB", err)    
+});
 // cluster => database => collection=> document => dataSet 
