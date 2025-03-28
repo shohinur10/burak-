@@ -1,11 +1,24 @@
-function countVowels(s: string): number {
-    const vowels = "aeiouAEIOU";
-    return Array.from(s).filter(char => vowels.includes(char)).length;
+function reverseSentence(sentence: string): string {
+    return sentence
+        .split(' ') // So'zlarni ajratamiz
+        .map(word => word.split('').reverse().join('')) // Har bir so'zni teskari yozamiz
+        .join(' '); // So'zlarni qayta birlashtiramiz
 }
 
-// Test
-console.log(countVowels("string"));  // Output: 1
-console.log(countVowels("hello"));   // Output: 2
+console.log(reverseSentence("we like coding!")); // "ew ekil gnidoc!"
+
+
+
+
+
+// function countVowels(s: string): number {
+//     const vowels = "aeiouAEIOU";
+//     return Array.from(s).filter(char => vowels.includes(char)).length;
+// }
+
+// // Test
+// console.log(countVowels("string"));  // Output: 1
+// console.log(countVowels("hello"));   // Output: 2
 
 
 

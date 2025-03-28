@@ -27,6 +27,7 @@ restaurantController.getSignup = (req: Request, res: Response) => {
     res.render("signup");
   } catch (err) {
     console.log("Error, getSignup:", err);
+    res.redirect("/admin");
   }
 }
 restaurantController.getLogin = (req: Request, res: Response) => {
@@ -35,7 +36,8 @@ restaurantController.getLogin = (req: Request, res: Response) => {
     res.render("login"); // This should render the login.ejs view
   } catch (err) {
     console.log("Error, getLogin:", err);
-    ;
+    res.redirect("/admin");
+    
   }
 };
 restaurantController.processSignup = async (req: AdminRequest, res: Response) => {
@@ -55,7 +57,10 @@ restaurantController.processSignup = async (req: AdminRequest, res: Response) =>
      });
   } catch (err) {
     console.log("Error, processSignup:", err);
-    res.send(err);
+    const message = 
+    err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}"); window.location.replace('admin/signup') </script> `
+    );
   }
 };
 
@@ -77,9 +82,24 @@ restaurantController.processLogin = async (req: AdminRequest, res: Response) => 
 
   } catch (err: any) {
     console.log("Error, processLogin:", err);
-    res.send(err);
+    const message = 
+    err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}"); window.location.replace('admin/login') </script> `
+    );
   }
 };
+restaurantController.logout = async (req: AdminRequest, res: Response) => {
+  try {
+    console.log("logout");
+     req.session.destroy(function(){
+      res.redirect("/admin"); 
+     });
+  } catch (err: any) {
+    console.log("Error,logout:", err);
+    res.redirect("/admin");
+  }
+};
+
 
 restaurantController.checkAuthSession = async (req: AdminRequest, res: Response) => {
   try {

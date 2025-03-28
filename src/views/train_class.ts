@@ -14,7 +14,10 @@
 Traditional frontend development => BSSR (Adminka )=> EJS
 Modern frontend development => SPA =>( Users app) REACT library 
 */
-
+ /*
+  requist join
+  desttoy all
+  */
 
 
 

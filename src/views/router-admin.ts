@@ -13,7 +13,7 @@ routerAdmin.get("/signup", restaurantController.getSignup)
 
 
  routerAdmin.get("/check-me",restaurantController.checkAuthSession); 
-// routerAdmin.get("/logout", restaurantController.logout);
+ routerAdmin.get("/logout", restaurantController.logout);
   // Corrected order: .post()
 
 /** Product */
