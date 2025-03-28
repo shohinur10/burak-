@@ -5,10 +5,12 @@ import routerAdmin from "./views/router-admin";
 import morgan from "morgan";
 import {MORGAN_FORMAT} from "./libs/types/config";
 
-import session from "express-session";
-import ConnectMongoDB from "connect-mongodb-session";
+import session from "express-session";//foydalanuvchi ma'lumotlarini vaqtincha saqlash) uchun ishlatiladi.
+import ConnectMongoDB from "connect-mongodb-session";//Session ma'lumotlarini MongoDB bazasida saqlash uchun ishlatiladi.
 
-const MongoDBStore = ConnectMongoDB(session);
+
+
+const MongoDBStore = ConnectMongoDB(session); // function dan qatrgann class 
 const store = new MongoDBStore({
     uri: String(process.env.MONGO_URL),
     collection:"session",

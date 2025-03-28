@@ -1,7 +1,7 @@
 import express from "express";
 const routerAdmin = express.Router();
-import router from './router';
 import restaurantController from "../controllers/restaurant.controller";  
+import productController from "../controllers/product.controllers";
 
 
 /** Restaurant */
@@ -17,6 +17,10 @@ routerAdmin.get("/signup", restaurantController.getSignup)
   // Corrected order: .post()
 
 /** Product */
+
+routerAdmin.get("/product/all", productController.getAllProducts);
+routerAdmin.post("/product/create", productController.createNewProduct);
+routerAdmin.post("/product/:id", productController.updateChosenProduct);
 /** User */ 
 
 export default routerAdmin;

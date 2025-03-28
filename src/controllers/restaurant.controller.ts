@@ -3,7 +3,7 @@ import { T } from "../libs/types/common";
 import { AdminRequest, LoginInput, MemberInput } from '../libs/types/member';
 import { MemberType } from "../libs/enums/member.enum";
 import MemberService from "../models/Member.service";
-import Errors, { HttpCode,Message } from "../libs/types//Errors";
+import Errors, { HttpCode, Message } from "../libs/types//Errors";
 
 // BSSR - uchun adminka loyihamiz uchun   
 
@@ -73,7 +73,8 @@ restaurantController.processLogin = async (req: AdminRequest, res: Response) => 
    const input =req.body as unknown as LoginInput;
     const result = await memberService.processLogin(input);
     
-    
+    // DB.sessions  & Cookies.SID save 
+  
     
      req.session.member = result;
      req.session.save(function(){
