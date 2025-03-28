@@ -5,13 +5,36 @@ import routerAdmin from "./views/router-admin";
 import morgan from "morgan";
 import {MORGAN_FORMAT} from "./libs/types/config";
 
+import session from "express-session";
+import ConnectMongoDB from "connect-mongodb-session";
+
+const MongoDBStore = ConnectMongoDB(session);
+const store = new MongoDBStore({
+    uri: String(process.env.MONGO_URL),
+    collection:"session",
+})
+
+
 // 1- Entrance 
 const app = express();
 app.use(express.static(path.join(__dirname, 'public'))); // Middleware Design Pattern => public API
 app.use(express.urlencoded({ extended: true }));  // Middleware Design Pattern => Traditional API
 app.use(express.json());  // Middleware Design Pattern => Rest API
 app.use(morgan(MORGAN_FORMAT)); // har bir  htpp faylgan jonatilgan log uchun ketgan vaqtdi console,logda korsatadi 
+
 // 2- Session
+app.use(
+    session({
+        secret: String(process.env.SESSION_SECRET),
+        cookie:{
+            maxAge: 1000 * 3600 * 3,// 3 hours
+        },
+        store: store,
+        resave: true ,
+        saveUninitialized: true,
+    })
+);
+
 
 // 3- Views 
 app.set('views', path.join(__dirname, 'views'));
