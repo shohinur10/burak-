@@ -7,6 +7,7 @@ import {MORGAN_FORMAT} from "./libs/types/config";
 
 import session from "express-session";//foydalanuvchi ma'lumotlarini vaqtincha saqlash) uchun ishlatiladi.
 import ConnectMongoDB from "connect-mongodb-session";//Session ma'lumotlarini MongoDB bazasida saqlash uchun ishlatiladi.
+import { T } from "./libs/types/common";
 
 
 
@@ -36,7 +37,11 @@ app.use(
         saveUninitialized: true,
     })
 );
-
+app.use(function(req, res, next){
+    const sessionInstance = req.session as T;
+    res.locals.member = sessionInstance.member;
+    next();
+})
 
 // 3- Views 
 app.set('views', path.join(__dirname, 'views'));

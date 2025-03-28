@@ -19,8 +19,9 @@ Modern frontend development => SPA =>( Users app) REACT library
   desttoy all
   */
 
-
-
+/* bizlar birornarsanni  ejs da include qilganimizda  bitta  - qoyamiz 
+qiymati  kerak bosa = tenglik  qoyamiz 
+*/
 
 // browser faqatgina get req qabul qiladu 
 // get faqatgina qandeydir malumotdi olish uchun ishlatilsa 
