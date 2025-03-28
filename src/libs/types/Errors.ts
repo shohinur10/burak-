@@ -1,34 +1,34 @@
 export enum HttpCode {
-    Ok =200,
-    CREATED =201,
-    NOT_MODIFIED =304,
-    BAD_REQUEST =400,
+    OK = 200,
+    CREATED = 201,
+    NOT_MODIFIED = 304,
+    BAD_REQUEST = 400,
     UNAUTHORIZED = 401,
-    FORBIDDEN =403,
+    FORBIDDEN = 403,
     NOT_FOUND = 404,
     INTERNAL_SERVER_ERROR = 500,
 }
 
-
-export enum Message{
-    SOMETHING_WENT_WORNG = "SOMETHUING WENT WRONG!",
-    NO_DATA_FOUND = "NO DATA IS FOUND!",
-    CREATED_FAILED = "CREATED IS FAILDE!",
-    UPDATED_FAILED = "UPDATED IS FAILED!",
-    USED_NICK_PHONE ="Yoy are inserting already used nick or phone",
-    NO_MEMBER_NICK = " No member with that number nick",
-    WRONG_PASWWORD ="Wrong password",
+export enum Message {
+    SOMETHING_WENT_WRONG = "Something went wrong!",
+    NO_DATA_FOUND = "No data found!",
+    CREATION_FAILED = "Creation failed!",
+    UPDATE_FAILED = "Update failed!",
+    USED_NICK_PHONE = "You are inserting an already used nickname or phone number.",
+    NO_MEMBER_NICK = "No member found with that nickname.",
+    WRONG_PASSWORD = "Wrong password!",
+    NOT_AUTHENTICATED = "You are not authenticated!,Please login first ",
 }
- class Errors extends Error{
-    public code : HttpCode;
-    public message : Message;
 
-    constructor(statusCode: HttpCode, statusMessage: Message){
-        super();
-         this.code = statusCode;
-         this.message =statusMessage;
+class Errors extends Error {
+    public code: HttpCode;
+    public message: Message;
 
+    constructor(statusCode: HttpCode, statusMessage: Message) {
+        super(statusMessage);
+        this.code = statusCode;
+        this.message = statusMessage;
     }
- }
+}
 
- export default Errors;
+export default Errors;

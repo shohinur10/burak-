@@ -22,7 +22,7 @@ class MemberService {
       return result.toJSON() as Member;
     } catch (err) {
       console.log("Error , model:signup", err);
-      throw new Errors(HttpCode.BAD_REQUEST, Message.USED_NICK_PHONE);
+      throw new Errors(HttpCode.BAD_REQUEST, Message.WRONG_PASSWORD);
     }
   }
 
@@ -40,7 +40,7 @@ class MemberService {
   
     const isMatch = await bcrypt.compare(input.memberPassword, member.memberPassword);
     if (!isMatch) 
-      throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASWWORD);
+      throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);
     const foundMember = await this.memberModel
     .findById(member._id)
     .select("memberNick memberType memberStatus memberPoints createdAt updatedAt") // Ensure all required fields are selected
@@ -60,7 +60,7 @@ class MemberService {
       .findOne({ memberType: MemberType.RESTAURANT })
       .exec();
 
-    if (exist) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATED_FAILED);
+    if (exist) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATION_FAILED);
 
     const salt = await bcrypt.genSalt();
     input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
@@ -70,7 +70,7 @@ class MemberService {
       result.memberPassword = ""; // Hide password before returning
       return result.toObject() as Member;
     } catch (err) {
-      throw new Errors(HttpCode.BAD_REQUEST, Message.CREATED_FAILED);
+      throw new Errors(HttpCode.BAD_REQUEST, Message.CREATION_FAILED);
     }
   }
 
@@ -84,7 +84,7 @@ class MemberService {
     if(!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
     const isMatch = await bcrypt.compare(input.memberPassword, member.memberPassword);
     // const isMatch = input.memberPassword === member.memberPassword;
-    if(!isMatch) throw new Errors(HttpCode.BAD_REQUEST, Message.WRONG_PASWWORD);
+    if(!isMatch) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATION_FAILED);
 
       
 
