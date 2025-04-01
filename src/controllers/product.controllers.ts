@@ -21,7 +21,7 @@ productController.getAllProducts = async (req: Request, res: Response) => {
   };
   
   productController.createNewProduct = async (req: Request, res: Response) => {
-    try {
+    try { //  Updates product details.
       console.log("createNewProduct ");
       res.send('Done!');
     } catch (err) {

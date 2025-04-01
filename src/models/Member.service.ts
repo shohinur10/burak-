@@ -56,17 +56,18 @@ class MemberService {
 
   /** SSR Signup */
   public async processSignup(input: MemberInput): Promise<Member> {
-    const exist = await this.memberModel
-      .findOne({ memberType: MemberType.RESTAURANT })
-      .exec();
+    // const exist = await this.memberModel
+    //   .findOne({ memberType: MemberType.RESTAURANT })
+    //   .exec();
 
-    if (exist) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATION_FAILED);
+    // if (exist) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATION_FAILED);
 
     const salt = await bcrypt.genSalt();
     input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
 
     try {
       const result = await this.memberModel.create(input);
+      console.log(result)
       result.memberPassword = ""; // Hide password before returning
       return result.toObject() as Member;
     } catch (err) {

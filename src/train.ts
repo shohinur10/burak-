@@ -1,11 +1,30 @@
-function reverseSentence(sentence: string): string {
-    return sentence
-        .split(' ') // So'zlarni ajratamiz
-        .map(word => word.split('').reverse().join('')) // Har bir so'zni teskari yozamiz
-        .join(' '); // So'zlarni qayta birlashtiramiz
+function getSquareNumbers(arr: number[]): { number: number, square: number }[] {
+    return arr.map(num => ({
+        number: num,
+        square: num * num
+    }));
 }
 
-console.log(reverseSentence("we like coding!")); // "ew ekil gnidoc!"
+// Example usage
+const result = getSquareNumbers([1, 2, 3]);
+console.log(result); 
+
+
+
+
+
+
+
+
+
+// function reverseSentence(sentence: string): string {
+//     return sentence
+//         .split(' ') // So'zlarni ajratamiz
+//         .map(word => word.split('').reverse().join('')) // Har bir so'zni teskari yozamiz
+//         .join(' '); // So'zlarni qayta birlashtiramiz
+// }
+
+// console.log(reverseSentence("we like coding!")); // "ew ekil gnidoc!"
 
 
 

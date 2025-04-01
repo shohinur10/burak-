@@ -67,28 +67,31 @@ restaurantController.processSignup = async (req: AdminRequest, res: Response) =>
 restaurantController.processLogin = async (req: AdminRequest, res: Response) => {
   try {
     console.log("processLogin");
-    console.log("body",req.body);
+    console.log("body", req.body);
     
-   // const input: LoginInput = req.body;
-   const input =req.body as unknown as LoginInput;
+    const input = req.body as unknown as LoginInput;  // Assuming req.body is valid
+    
+    // Process login and get result
     const result = await memberService.processLogin(input);
     
-    // DB.sessions  & Cookies.SID save 
-  
-    
-     req.session.member = result;
-     req.session.save(function(){
-      res.send(result); 
-     });
+    // Save session data
+    req.session.member = result;  
+    req.session.save(function(err) {
+      if (err) {
+        console.log("Session save error:", err);
+        return res.send(`<script> alert("Session error, please try again."); window.location.replace('admin/login') </script>`);
+      }
+      // Send response as JSON instead of res.send(result) if result is an object
+      res.json(result);
+    });
 
   } catch (err: any) {
     console.log("Error, processLogin:", err);
-    const message = 
-    err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
-    res.send(`<script> alert("${message}"); window.location.replace('admin/login') </script> `
-    );
+    const message = err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}"); window.location.replace('admin/login') </script>`);
   }
 };
+
 restaurantController.logout = async (req: AdminRequest, res: Response) => {
   try {
     console.log("logout");
