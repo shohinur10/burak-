@@ -53,8 +53,8 @@ res.send(
       console.log("updateChosenProduct ");
       const id = req.params.id;
       
- const result = await ProductService.updateChosenProduct(id, req.body);
-
+ const result = await productService.updateChosenProduct(id, req.body);
+       
       res.status(HttpCode.OK).json({ data: result});
     } catch (err) {
       console.log("Error,updateChosenProduc:", err);

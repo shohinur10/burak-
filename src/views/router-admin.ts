@@ -26,8 +26,8 @@ routerAdmin.get("/logout", restaurantController.logout);
 
 /** ========== Product Routes ========== **/
 routerAdmin.get(
-  "/product/all", 
-  restaurantController.verifyRestaurant, 
+  "/product/all", //endpoint 
+  restaurantController.verifyRestaurant, //authoritation middleware 
   productController.getAllProducts
 );
 

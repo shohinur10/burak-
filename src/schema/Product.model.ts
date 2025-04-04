@@ -11,7 +11,7 @@ const productSchema = new Schema(
     productStatus: {
       type: String,
       enum: ProductStatus, // FIXED
-      required: true,
+      default: ProductStatus.PAUSE,
     },
     productCollection: {
       type: String,

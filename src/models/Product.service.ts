@@ -29,9 +29,8 @@ import { shapeIntoMongooseObjectId } from "../libs/types/config";
 
     public async createNewProduct(input: ProductInput): Promise<Product> {
         try {
-            const product = new this.productModel(input); // Create new product instance
-            const savedProduct = await product.save(); // Save the product to DB
-            return savedProduct.toObject() as Product; // Cast to Product type
+            const product = await this.productModel.create(input); // Create new product instance // Save the product to DB
+            return product.toObject() as Product; // Cast to Product type
         } catch (err) {
             console.error("Error, model:createNewProduct:", err);
             throw new Errors(HttpCode.BAD_REQUEST, Message.CREATION_FAILED);
