@@ -3,8 +3,8 @@ import {
     ProductCollection,
     ProductSize, 
     ProductStatus,
+    ProductVolume
 } from '../libs/enums/product.enum';
-import { ProductVaolume } from "../libs/enums/product.enum";
 
 const productSchema = new Schema(
   {
@@ -35,10 +35,10 @@ const productSchema = new Schema(
       enum: ProductSize,
       default: ProductSize.NORMAL,
     },
-    productVaaolume: {
+    productVolume: {
       type: Number,
-      enum: ProductVaolume,
-      default: ProductVaolume.ONE,
+      enum: ProductVolume,
+      default: ProductVolume.ONE,
     },
     productDesc: {
       type: String,
@@ -57,7 +57,7 @@ const productSchema = new Schema(
 
 // Ensures a unique combination of productName, productSize, and productVolume
 productSchema.index(
-  { productName: 1, productSize: 1, productVaolume: 1 },
+  { productName: 1, productSize: 1, productVolume: 1 },
   { unique: true }
 );
 
