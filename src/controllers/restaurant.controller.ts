@@ -41,34 +41,31 @@ restaurantController.getLogin = (req: Request, res: Response) => {
   }
 };
 restaurantController.processSignup = async (
-  req: AdminRequest, 
+  req: AdminRequest,
   res: Response
 ) => {
   try {
-    console.log("processSignup");
-
+    console.log("Process Signup");
     const file = req.file;
-    if (!file) {
+    if (!file)
       throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
-    }
-
     const newMember: MemberInput = req.body;
-    newMember.memberImage = file?.path.replace(/\\/g, "/");
+    newMember.memberImage = file?.path,
     newMember.memberType = MemberType.RESTAURANT;
 
-    const result = await memberService.processSignup(newMember); // Make sure this method exists
+    const result = await memberService.processSignup(newMember);
 
     req.session.member = result;
-    req.session.save(() => {
-      res.redirect("/admin/product/all"); // Fixed typo: 'prouct' → 'product'
+    req.session.save(function () {
+      res.redirect("/admin/product/all");
     });
-
-  } catch (err: any) {
-    console.log("Error, processSignup:", err);
-    const message = err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
-    res.send(`
-      <script> alert("${message}"); window.location.replace('/admin/signup'); </script>
-    `);
+  } catch (err) {
+    console.log("Error, Proccess Login:", err);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(
+      `<script> alert("${message}") window.location.replace('admin/signup') <script> `
+    );
   }
 };
 

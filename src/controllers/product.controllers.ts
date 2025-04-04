@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import { T } from "../libs/types/common";
-import  ProductService from "../models/Product.service";
+import ProductService from '../models/Product.service';
 import { ProductInput } from '../libs/types/product';
 import { AdminRequest } from "../libs/types/member";
 
 
-const memberService = new ProductService();
+const productService= new ProductService();
 
 const productController: T = {};
  /** SPA */
@@ -14,7 +14,7 @@ const productController: T = {};
 productController.getAllProducts = async (req: Request, res: Response) => {
     try {
       console.log("getAllProducts");
-      const data = await ProductService.getAllProducts();
+      const data = await productService.getAllProducts();
       console.log("daat:", data);
       
       res.render("products", {products: data});
@@ -34,9 +34,9 @@ productController.getAllProducts = async (req: Request, res: Response) => {
   
    const data:ProductInput =req.body;
     data.productImages = req.files?.map(ele =>{
-      return ele.path.replace(/\\/g,"/");
+      return ele.path;
     });
-await ProductService.createNewProduct(data);
+await productService.createNewProduct(data);
 res.send(
   `<script> alert("Successful creation "); window.location.replace('admin/product/all') </script>`);
 
