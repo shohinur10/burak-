@@ -1,13 +1,23 @@
-function getSquareNumbers(arr: number[]): { number: number, square: number }[] {
-    return arr.map(num => ({
-        number: num,
-        square: num * num
-    }));
-}
 
-// Example usage
-const result = getSquareNumbers([1, 2, 3]);
-console.log(result); 
+
+function palindromCheck(word: string): boolean {
+    const reversed = word.split('').reverse().join('');
+    return word === reversed;
+  }
+  
+  // Test qilish
+  console.log(palindromCheck("dad")) ;//true;
+  
+  // function getSquareNumbers(arr: number[]): { number: number, square: number }[] {
+//     return arr.map(num => ({
+//         number: num,
+//         square: num * num
+//     }));
+// }
+
+// // Example usage
+// const result = getSquareNumbers([1, 2, 3]);
+// console.log(result); 
 
 
 

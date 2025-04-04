@@ -2,9 +2,12 @@
 
 <body>
     <div>
-    <div>Product page </div>
+    <div>Products page </div>
     <div> <%=member.memberNick%></div>
 
+ <% product.map((value, key) => {%>
+    <p><%= value.productName &><%= value.productSize &></p>
+   <% } )%>
 </div>
 </body>
 

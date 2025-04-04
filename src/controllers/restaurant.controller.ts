@@ -29,7 +29,7 @@ restaurantController.getSignup = (req: Request, res: Response) => {
     console.log("Error, getSignup:", err);
     res.redirect("/admin");
   }
-}
+};
 restaurantController.getLogin = (req: Request, res: Response) => {
   try {
     console.log("getLogin");
@@ -40,57 +40,68 @@ restaurantController.getLogin = (req: Request, res: Response) => {
     
   }
 };
-restaurantController.processSignup = async (req: AdminRequest, res: Response) => {
+restaurantController.processSignup = async (
+  req: AdminRequest, 
+  res: Response
+) => {
   try {
     console.log("processSignup");
-    console.log("body", req.body);
+
+    const file = req.file;
+    if (!file) {
+      throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
+    }
 
     const newMember: MemberInput = req.body;
+    newMember.memberImage = file?.path.replace(/\\/g, "/");
     newMember.memberType = MemberType.RESTAURANT;
-    const result = await memberService.processSignup(newMember); 
-    
-    
 
-     req.session.member = result;
-     req.session.save(function(){
-      res.send(result); 
-     });
-  } catch (err) {
+    const result = await memberService.processSignup(newMember); // Make sure this method exists
+
+    req.session.member = result;
+    req.session.save(() => {
+      res.redirect("/admin/product/all"); // Fixed typo: 'prouct' → 'product'
+    });
+
+  } catch (err: any) {
     console.log("Error, processSignup:", err);
-    const message = 
-    err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
-    res.send(`<script> alert("${message}"); window.location.replace('admin/signup') </script> `
-    );
+    const message = err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`
+      <script> alert("${message}"); window.location.replace('/admin/signup'); </script>
+    `);
   }
 };
 
-restaurantController.processLogin = async (req: AdminRequest, res: Response) => {
+// ✅ FIXED: processLogin moved outside
+restaurantController.processLogin = async (
+  req: AdminRequest,
+  res: Response
+) => {
   try {
     console.log("processLogin");
-    console.log("body", req.body);
-    
-    const input = req.body as unknown as LoginInput;  // Assuming req.body is valid
-    
-    // Process login and get result
+    const input: LoginInput = req.body;
     const result = await memberService.processLogin(input);
-    
-    // Save session data
-    req.session.member = result;  
-    req.session.save(function(err) {
+
+    req.session.member = result;
+    req.session.save((err) => {
       if (err) {
         console.log("Session save error:", err);
-        return res.send(`<script> alert("Session error, please try again."); window.location.replace('admin/login') </script>`);
+        return res.send(`
+          <script> alert("Session error, please try again."); window.location.replace('/admin/login') </script>
+        `);
       }
-      // Send response as JSON instead of res.send(result) if result is an object
-      res.json(result);
+      res.redirect("/admin/product/all"); // Typo fixed
     });
 
   } catch (err: any) {
     console.log("Error, processLogin:", err);
     const message = err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
-    res.send(`<script> alert("${message}"); window.location.replace('admin/login') </script>`);
+    res.send(`
+      <script> alert("${message}"); window.location.replace('/admin/login'); </script>
+    `);
   }
 };
+
 
 restaurantController.logout = async (req: AdminRequest, res: Response) => {
   try {
@@ -104,7 +115,7 @@ restaurantController.logout = async (req: AdminRequest, res: Response) => {
   }
 };
 
-
+// Authentication check  for session
 restaurantController.checkAuthSession = async (req: AdminRequest, res: Response) => {
   try {
     console.log("checkAuthSession");
@@ -117,6 +128,7 @@ restaurantController.checkAuthSession = async (req: AdminRequest, res: Response)
   }
 };
 
+// Authorization  middleware
 restaurantController.verifyRestaurant =(
   req: AdminRequest,
    res: Response,
@@ -130,7 +142,6 @@ restaurantController.verifyRestaurant =(
     res.send(`
       <script> alert("${message}"); window.location.replace('/admin/login'); </script>`
     );
-   
 }
 };
 

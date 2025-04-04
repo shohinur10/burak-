@@ -36,13 +36,12 @@ const productSchema = new Schema(
       default: ProductSize.NORMAL,
     },
     productVaaolume: {
-      type: String,
+      type: Number,
       enum: ProductVaolume,
       default: ProductVaolume.ONE,
     },
     productDesc: {
       type: String,
-      required: true,
     },
     productImage: {
       type: [String],
