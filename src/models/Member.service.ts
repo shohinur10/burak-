@@ -95,7 +95,7 @@ class MemberService {
     if (!result) {
       throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
     }
-    return result.toObject as unknown as Member;
+    return result.toObject() as Member;
   }
   
   public async getUsers(): Promise<Member[]>{

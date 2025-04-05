@@ -80,14 +80,8 @@ restaurantController.processLogin = async (
     const result = await memberService.processLogin(input);
 
     req.session.member = result;
-    req.session.save((err) => {
-      if (err) {
-        console.log("Session save error:", err);
-        return res.send(`
-          <script> alert("Session error, please try again."); window.location.replace('/admin/login') </script>
-        `);
-      }
-      res.redirect("/admin/product/all"); // Typo fixed
+    req.session.save(function () {
+      res.redirect("/admin/product/all"); // redirecting to mentioned endpoint
     });
 
   } catch (err: any) {

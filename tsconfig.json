@@ -16,6 +16,6 @@
             "*": ["node_modules/*"]
         }
     },
-    "include": ["src/**/*.ts"], // Updated include pattern
+    "include": ["src/**/*.ts", "src/router.ts"], // Updated include pattern
     "exclude": ["node_modules"]
 }
