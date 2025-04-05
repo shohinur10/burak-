@@ -3,7 +3,7 @@ import path from "path";
 import router from "../src/router";
 import routerAdmin from "./router-admin";
 import morgan from "morgan";
-import {MORGAN_FORMAT} from "./libs/types/config";
+import {MORGAN_FORMAT} from "./libs/config";
 
 import session from "express-session";//foydalanuvchi ma'lumotlarini vaqtincha saqlash) uchun ishlatiladi.
 import ConnectMongoDB from "connect-mongodb-session";//Session ma'lumotlarini MongoDB bazasida saqlash uchun ishlatiladi.

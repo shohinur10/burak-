@@ -2,7 +2,7 @@
 import { Product, ProductInput, ProductUpdateInput } from "../libs/types/product";
 import ProductModel from "../schema/Product.model";
 import Errors, { HttpCode, Message } from "../libs/Errors";
-import { shapeIntoMongooseObjectId } from "../libs/types/config";
+import { shapeIntoMongooseObjectId } from "../libs/config";
 
     class ProductService {
       static updateChosenProduct(id: string, body: any) {
@@ -27,15 +27,15 @@ import { shapeIntoMongooseObjectId } from "../libs/types/config";
     return result as unknown as Product[];
 }
 
-    public async createNewProduct(input: ProductInput): Promise<Product> {
-        try {
-            const product = await this.productModel.create(input); // Create new product instance // Save the product to DB
-            return product.toObject() as Product; // Cast to Product type
-        } catch (err) {
-            console.error("Error, model:createNewProduct:", err);
-            throw new Errors(HttpCode.BAD_REQUEST, Message.CREATION_FAILED);
-        }
+public async createNewProduct(input: ProductInput): Promise<Product> {
+    try {
+      const result = await this.productModel.create(input);
+      return result.toObject() as Product;
+    } catch (err) {
+      console.error("Error creating product:", err);
+      throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.CREATION_FAILED);
     }
+  } 
 public async updateChosenProduct(
     id: string,
     input: ProductUpdateInput

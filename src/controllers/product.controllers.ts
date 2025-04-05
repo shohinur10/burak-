@@ -24,30 +24,27 @@ productController.getAllProducts = async (req: Request, res: Response) => {
       else res.status(Errors.standard.code).json(Errors.standard);
       }
   };
-  
-  productController.createNewProduct = async (req: AdminRequest, res: Response) => {
-    try { //  Updates product details.
-      console.log("createNewProduct ");
-      console.log("req.files:",req.files);
-      if(!req.files?.length)
-        throw new Errors(HttpCode.INTERNAL_SERVER_ERROR,Message.CREATION_FAILED);
-  
-   const data:ProductInput =req.body;
-    data.productImages = req.files?.map(ele =>{
-      return ele.path;
-    });
-await productService.createNewProduct(data);
-res.send(
-  `<script> alert("Successful creation "); window.location.replace('admin/product/all') </script>`);
 
-    } catch (err) {
-      console.log("Error,createNewProduct : " , err);
-     const message =
-     err instanceof Errors? err.message: Message.SOMETHING_WENT_WRONG;
-     res.send(
-      `<script> alert("${message} "); window.location.replace('admin/product/all') </script>`)
-      }
-  };
+  productController.createNewProduct = async (req: AdminRequest, res:Response) => {
+    try{
+        console.log("createNewProduct")
+        if(!req.files?.length)
+            throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.CREATION_FAILED);
+
+        const data: ProductInput = req.body;
+        data.productImages = (req.files as Express.Multer.File[]).map((file) => {
+            return file.path.replace(/\\/g, "/");
+        });
+        await productService.createNewProduct(data)
+        res.send(`<script>alert("Sucessfully creation"); window.location.replace('/admin/product/all' )</script>`);
+    }catch(err){
+        const message = 
+            err instanceof Errors ? err.message: Message.SOMETHING_WENT_WRONG;
+        res.send(`<script>alert("${message}"); window.location.replace('admin/signup' )</script>`);
+    }
+}
+  
+
   productController.updateChosenProduct = async (req: Request, res: Response) => {
     try {
       console.log("updateChosenProduct ");

@@ -3,7 +3,7 @@ import { T } from "../libs/types/common";
 import { AdminRequest, LoginInput, MemberInput } from '../libs/types/member';
 import { MemberType } from "../libs/enums/member.enum";
 import MemberService from "../models/Member.service";
-import Errors, { HttpCode, Message } from "../libs/types//Errors";
+import Errors, { HttpCode, Message } from "../libs/Errors";
 
 // BSSR - uchun adminka loyihamiz uchun   
 
