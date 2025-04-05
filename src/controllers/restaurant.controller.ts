@@ -60,7 +60,7 @@ restaurantController.processSignup = async (
       res.redirect("/admin/product/all");
     });
   } catch (err) {
-    console.log("Error, Proccess Login:", err);
+    console.log("Error, processSignup:", err);
     const message =
       err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
     res.send(
@@ -123,11 +123,19 @@ restaurantController.getUsers = async (req: Request, res: Response) => {
   }
 };
 
-restaurantController.updatedChosenUser = (req: Request, res: Response) => {
+restaurantController.updatedChosenUser = async (req: Request, res: Response) => {
   try {
     console.log("updatedChosenUser")
-  }catch (err) {
+    const result = await memberService.updatedChosenUser(req.body);
+    res.status(HttpCode.OK).json({ data: result });
+  } catch (err) {
     console.log("Error, updatedChosenUser:", err);
+    if (err instanceof Errors) {
+      res.status(err.code).json({ message: err.message });
+    } else {
+      const error = new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.SOMETHING_WENT_WRONG);
+      res.status(error.code).json({ message: error.message });
+    }
   }
 };
 
@@ -158,7 +166,7 @@ restaurantController.verifyRestaurant =(
     res.send(`
       <script> alert("${message}"); window.location.replace('/admin/login'); </script>`
     );
-}
+  }
 };
 
 export default restaurantController;

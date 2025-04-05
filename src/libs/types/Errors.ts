@@ -21,6 +21,9 @@ export enum Message {
 }
 
 class Errors extends Error {
+  static standard(standard: any) {
+    throw new Error("Method not implemented.");
+  }
     public code: HttpCode;
     public message: Message;
 

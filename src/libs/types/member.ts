@@ -31,6 +31,16 @@ export interface LoginInput {
     memberNick:string;
     memberPassword:string;
 }
+export interface MemberUpdateInput {
+    _id: ObjectId;
+        memberStatus?: MemberStatus; // Optional
+        memberNick?: string; // Required
+        memberPhone?: string; // Required
+        memberPassword?: string; // Required
+        memberDesc?: string; // Optional
+        memberAddress?: string; // Optional
+        memberImage?: string; // Optional
+}
  export interface AdminRequest extends Request {
     member: Member;
     session: Session & { member: Member} ;
