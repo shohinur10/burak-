@@ -27,7 +27,7 @@ routerAdmin.get("/logout", restaurantController.logout);
 /** ========== Product Routes ========== **/
 routerAdmin.get(
   "/product/all", //endpoint 
-  restaurantController.verifyRestaurant, //authoritation middleware 
+  restaurantController.verifyRestaurant, //authorization middleware 
   productController.getAllProducts
 );
 
@@ -35,7 +35,7 @@ routerAdmin.post(
   "/product/create", 
   restaurantController.verifyRestaurant,
   makeUploader("products").array("productImages", 5), // allow up to 5 images per product
-  productController.createNewProduct
+  productController.createNewProduct//Multer middleware
 );
 
 routerAdmin.post(
@@ -43,7 +43,10 @@ routerAdmin.post(
   restaurantController.verifyRestaurant,
   productController.updateChosenProduct
 );
-
+/**  USER */
+routerAdmin.get("/user/all", restaurantController.verifyRestaurant,
+  restaurantController.getUsers
+);
 
 /** ========== Export ========== **/
 export default routerAdmin;

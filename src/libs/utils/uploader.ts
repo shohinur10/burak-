@@ -31,7 +31,7 @@ function getTargetImageStorage(address: any) {
 //     },
 //     filename: function (req, file, cb) {
 //         console.log(file);
-//         const extension = path.extname(file.originalname).ext; // ext bu yuklanyotgan raxm di type aniqleydi  png , jpg va etc 
+//         const extension = path.extname(file.originalname).ext; // ext bu yuklanyotgan rasm di type aniqleydi  png , jpg va etc 
 //         const random_name = v4() + extension;
 //         cb(null, random_name);
 //     }
