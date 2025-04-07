@@ -1,12 +1,19 @@
 
+function calculateSumOfNumbers(arr: any[]): number {
+  return arr.filter(item => typeof item === 'number')
+            .reduce((sum, num) => sum + num, 0);
+}
 
-function palindromCheck(word: string): boolean {
-    const reversed = word.split('').reverse().join('');
-    return word === reversed;
-  }
+// Example:
+console.log(calculateSumOfNumbers([10, "10", {son: 10}, true, 35]));
+
+// function palindromCheck(word: string): boolean {
+//     const reversed = word.split('').reverse().join('');
+//     return word === reversed;
+//   }
   
-  // Test qilish
-  console.log(palindromCheck("dad")) ;//true;
+//   // Test qilish
+//   console.log(palindromCheck("dad")) ;//true;
   
   // function getSquareNumbers(arr: number[]): { number: number, square: number }[] {
 //     return arr.map(num => ({

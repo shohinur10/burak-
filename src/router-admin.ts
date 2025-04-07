@@ -27,19 +27,19 @@ routerAdmin.get("/logout", restaurantController.logout);
 /** ========== Product Routes ========== **/
 routerAdmin.get(
   "/product/all", //endpoint 
-  restaurantController.verifyRestaurant, //authorization middleware 
+  restaurantController.verifyRestaurant, //Middleware : Authorization
   productController.getAllProducts
 );
 
 routerAdmin.post(
   "/product/create", 
-  restaurantController.verifyRestaurant,
-  makeUploader("products").array("productImages", 5), // allow up to 5 images per product
-  productController.createNewProduct//Multer middleware
+  restaurantController.verifyRestaurant,//Authorization => req.member 
+  makeUploader("products").array("productImages", 5), //Multer => req.files
+  productController.createNewProduct//req.member req.files boyitildi 
 );
 
 routerAdmin.post(
-  "/product/:id", 
+  "/product/:id", //params
   restaurantController.verifyRestaurant,
   productController.updateChosenProduct
 );

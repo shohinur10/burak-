@@ -17,7 +17,7 @@ productController.getAllProducts = async (req: Request, res: Response) => {
       const data = await productService.getAllProducts();
       console.log("data:", data);
       
-      res.render("products", {products: data});
+      res.render("products", {products: data});// render malumotlardi html  korinishda chiqarib berair 
     } catch (err) {
       console.log("Error, getAllProducts: " , err);
       if(err instanceof Errors) res.status(err.code).json(err);
@@ -36,7 +36,7 @@ productController.getAllProducts = async (req: Request, res: Response) => {
             return file.path.replace(/\\/g, "/");
         });
         await productService.createNewProduct(data)
-        res.send(`<script>alert("Sucessfully creation"); window.location.replace('/admin/product/all' )</script>`);
+        res.send(`<script>alert("Successfully creation"); window.location.replace('/admin/product/all' )</script>`);
     }catch(err){
         const message = 
             err instanceof Errors ? err.message: Message.SOMETHING_WENT_WRONG;
