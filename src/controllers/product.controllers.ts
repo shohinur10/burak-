@@ -29,6 +29,12 @@ productController.getAllProducts = async (req: Request, res: Response) => {
     try{
         console.log("createNewProduct")
         if(!req.files?.length)
+   //req.files?.length – bu "yuklangan fayllar mavjudmi?" degan savol:
+
+// Fayllar bor bo‘lsa → length ularning sonini qaytaradi.
+
+// Fayllar yo‘q bo‘lsa → undefined bo‘ladi.
+
             throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.CREATION_FAILED);
 
         const data: ProductInput = req.body;
@@ -40,7 +46,7 @@ productController.getAllProducts = async (req: Request, res: Response) => {
     }catch(err){
         const message = 
             err instanceof Errors ? err.message: Message.SOMETHING_WENT_WRONG;
-        res.send(`<script>alert("${message}"); window.location.replace('admin/signup' )</script>`);
+        res.send(`<script>alert("${message}"); window.location.replace('/admin/signup' )</script>`);
     }
 }
   

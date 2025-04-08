@@ -46,10 +46,11 @@ public async updateChosenProduct(
 ): Promise<Product> {
     try {
         id = shapeIntoMongooseObjectId(id);
+        //input ichidan id qabul qilib uni shape qilib olamiz 
         const result = await this.productModel.findOneAndUpdate(
-            { _id: id },
-            input,
-            { new: true }
+            { _id: id },//filter
+            input,// update
+            { new: true }// options
         ).exec();
         if (!result) {
             throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);

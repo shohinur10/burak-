@@ -64,7 +64,7 @@ restaurantController.processSignup = async (
     const message =
       err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
     res.send(
-      `<script> alert("${message}") window.location.replace('admin/signup') <script> `
+      `<script> alert("${message}") window.location.replace('/admin/signup') <script> `
     );
   }
 };
@@ -111,6 +111,7 @@ restaurantController.getUsers = async (req: Request, res: Response) => {
     console.log("getUsers")
     const result = await memberService.getUsers();
     res.render("users",{users: result});
+    //user  degan page jonatib users degan objectdi  result olqali pas qilishini sorayyapmiz 
   }catch (err) {
     console.log("Error, getUsers:", err);
     res.redirect("/admin/login");
@@ -121,6 +122,7 @@ restaurantController.updatedChosenUser = async (req: Request, res: Response) => 
   try {
     console.log("updatedChosenUser")
     const result = await memberService.updatedChosenUser(req.body);
+    //updatedChosenUser da call qilyapmiz req.body ni olib berishi uchun
     res.status(HttpCode.OK).json({ data: result });
   } catch (err) {
     console.log("Error, updatedChosenUser:", err);

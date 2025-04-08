@@ -37,6 +37,8 @@ routerAdmin.post(
   makeUploader("products").array("productImages", 5), //Multer => req.files
   productController.createNewProduct//req.member req.files boyitildi 
 );
+// Multer bu form data handler qaysiki postmandan kelgan req 
+
 
 routerAdmin.post(
   "/product/:id", //params
