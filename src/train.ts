@@ -1,11 +1,20 @@
 
-function calculateSumOfNumbers(arr: any[]): number {
-  return arr.filter(item => typeof item === 'number')
-            .reduce((sum, num) => sum + num, 0);
+
+function objectToArray(obj: { [key: string]: any }): [string, any][] {
+  return Object.entries(obj);
 }
 
-// Example:
-console.log(calculateSumOfNumbers([10, "10", {son: 10}, true, 35]));
+
+const result = objectToArray({ a: 10, b: 20 });
+console.log(result); 
+
+// function calculateSumOfNumbers(arr: any[]): number {
+//   return arr.filter(item => typeof item === 'number')
+//             .reduce((sum, num) => sum + num, 0);
+// }
+
+// // Example:
+// console.log(calculateSumOfNumbers([10, "10", {son: 10}, true, 35]));
 
 // function palindromCheck(word: string): boolean {
 //     const reversed = word.split('').reverse().join('');
