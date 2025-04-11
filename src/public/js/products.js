@@ -1,5 +1,5 @@
 console.log("Products frontend javascript file");
-
+// Value for order types such as drink , food , salad that change by order and types 
 $(function(){
     $(".product-collection").on("change",()=>{
         const selectedValue = $(".product-collection").val();
@@ -20,9 +20,32 @@ $(function(){
         $(".dish-container").slideToggle(100);
         $("#process-btn").css("display","flex");
     });
+
+// Update product process codes 
+    $(".new-product-status").on("change",async function(e) {
+        const id = e.target.id;
+        const productStatus = $(`#${id}.new-product-status`).val();
+        console.log("id:", id);
+        console.log("productStatus:", productStatus);
+
+        try {
+            const response = await axios.post(`/admin/product/${id}`, 
+                {productStatus: productStatus});
+                console.log("response:", response );
+                const result = response.data;
+                if(result.data){
+                    console.log("Product updated!");
+                    $(".new-product-status").blur();
+        
+                }else alert ("Product update failed!");
+        }catch (err) {
+            console.log(err);
+            alert("ProductStatus update failed!");
+        }
+    })
 });
 
- 
+ // Validation codes 
 function validateForm() {
     const productName = $(".product-name").val();
     const productPrice = $(".product-price").val();
@@ -44,6 +67,7 @@ function validateForm() {
     } else return true;
 }
 
+// Image codes for add for button 
 function previewFileHandler(input, order) {
     const imgClassName = input.className;
     console.log("input:", input);
