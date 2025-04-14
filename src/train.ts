@@ -1,11 +1,20 @@
+function calculate(expression: string): number {
+  return expression
+    .split('+')
+    .map((str: string) => parseInt(str.trim(), 10))
+    .reduce((a: number, b: number) => a + b, 0);
+}
+
+
+console.log(calculate("1+3"));
 // Shunday function yozing, u 2 ta parametrgga ega bolib birinchisi object, ikkinchisi string. Agar string parametr objectni propertysi bolsa true bolmasa false qaytarsin.
 // MASALAN: hasProperty({name: "BMW", model: "M3"}, "model") return true; hasProperty({name: "BMW", model: "M3"}, "year") return false
 
-function hasProperty(obj: object, key: string): boolean {
-  return key in obj;
-}
-console.log(hasProperty({ name: "BMW", model: "M3" }, "model")); // true
-console.log(hasProperty({ name: "BMW", model: "M3" }, "year"));  // false
+// function hasProperty(obj: object, key: string): boolean {
+//   return key in obj;
+// }
+// console.log(hasProperty({ name: "BMW", model: "M3" }, "model")); // true
+// console.log(hasProperty({ name: "BMW", model: "M3" }, "year"));  // false
 
  
 

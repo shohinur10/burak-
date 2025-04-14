@@ -11,6 +11,8 @@ $(function(){
             $("#product-collection").show();
         }
     });
+    // jquery orqali button larni bosish orqali
+
     $("#process-btn").on("click", () =>{
         $(".dish-container").slideToggle(500);
         $("#process-btn").css("display","none");
