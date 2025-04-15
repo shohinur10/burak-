@@ -1,12 +1,43 @@
-function calculate(expression: string): number {
-  return expression
-    .split('+')
-    .map((str: string) => parseInt(str.trim(), 10))
-    .reduce((a: number, b: number) => a + b, 0);
+// TASK S
+
+// Shunday function tuzing, u numberlardan tashkil topgan array qabul qilsin
+// va o'sha numberlar orasidagi tushib qolgan sonni topib uni return qilsin.
+
+// MASALAN: missingNumber([3, 0, 1]); return 2
+
+// Yuqoridagi misolda, berilayotgan sonlar tarkibini tartiblasak by typeScript
+// '2' soni tushib qolganTASK S
+
+// Shunday function tuzing, u numberlardan tashkil topgan array qabul qilsin
+// va o'sha numberlar orasidagi tushib qolgan sonni topib uni return qilsin.
+
+// MASALAN: missingNumber([3, 0, 1]); return 2
+
+// Yuqoridagi misolda, berilayotgan sonlar tarkibini tartiblasak by typeScript
+// '2' soni tushib qolgan
+
+
+
+
+
+
+function missingNumber(nums: number[]): number {
+  const n = nums.length;
+  const expectedSum = (n * (n + 1)) / 2;
+  const actualSum = nums.reduce((acc, num) => acc + num, 0);
+  return expectedSum - actualSum;
 }
+console.log(missingNumber([3, 0, 1]))
+
+// function calculate(expression: string): number {
+//   return expression
+//     .split('+')
+//     .map((str: string) => parseInt(str.trim(), 10))
+//     .reduce((a: number, b: number) => a + b, 0);
+// }
 
 
-console.log(calculate("1+3"));
+// console.log(calculate("1+3"));
 // Shunday function yozing, u 2 ta parametrgga ega bolib birinchisi object, ikkinchisi string. Agar string parametr objectni propertysi bolsa true bolmasa false qaytarsin.
 // MASALAN: hasProperty({name: "BMW", model: "M3"}, "model") return true; hasProperty({name: "BMW", model: "M3"}, "year") return false
 
