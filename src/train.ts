@@ -1,3 +1,36 @@
+// TASK U
+
+// Shunday function tuzing, uni number parametri bo'lsin.
+// Va bu function berilgan parametrgacha, 0'dan boshlab
+// oraliqda nechta toq sonlar borligini aniqlab return qilsi.
+
+// MASALAN: sumOdds(9) return 4; sumOdds(11) return 5;
+
+// Yuqoridagi birinchi misolda, argument sifatida, 9 berilmoqda.
+// Va 0'dan boshlab sanaganda 9'gacha 4'ta toq son mavjud. 
+// Keyingi namunada ham xuddi shunday xolat takrorlanmoqda.   by typeScript version
+
+function sumOdds(n: number): number {
+  const k = Math.floor(n / 2);
+  return k * k;
+}
+
+// Examples:
+console.log(sumOdds(9));  
+console.log(sumOdds(11)); 
+
+// i % 2 !== 0 — bu ifoda i toq sonligini tekshiradi.
+
+// for sikli 0 dan n gacha aylanishda faqat toq sonlarni sanaydi.
+
+// n soni o'z ichiga olinmaydi, ya'ni 0 dan n - 1 gacha qaraladi.
+
+
+
+
+
+
+
 //Task T
 function mergeSortedArrays(arr1: number[], arr2: number[]): number[] {
   const mergedArray: number[] = [];
