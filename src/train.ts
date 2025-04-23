@@ -1,3 +1,26 @@
+// Task V
+// Shunday function yozing, uni string parametri bo'lsin.
+// Va bu function stringdagi har bir harfni o'zi bilan
+// necha marotaba taktorlanganligini ko'rsatuvchi object qaytarsin.
+  
+// MASALAN: countChars("hello") return {h: 1, e: 1, l: 2, o: 1}
+
+function countChars(input: string): { [key: string]: number } {
+  const result: { [key: string]: number } = {};
+
+  for (const char of input) {
+    if (result[char]) {
+      result[char]++;
+    } else {
+      result[char] = 1;
+    }
+  }
+
+  return result;
+}
+
+
+console.log(countChars("hello")); // { h: 1, e: 1, l: 2, o: 1 }
 // TASK U
 
 // Shunday function tuzing, uni number parametri bo'lsin.
@@ -10,14 +33,14 @@
 // Va 0'dan boshlab sanaganda 9'gacha 4'ta toq son mavjud. 
 // Keyingi namunada ham xuddi shunday xolat takrorlanmoqda.   by typeScript version
 
-function sumOdds(n: number): number {
-  const k = Math.floor(n / 2);
-  return k * k;
-}
+// function sumOdds(n: number): number {
+//   const k = Math.floor(n / 2);
+//   return k * k;
+// }
 
-// Examples:
-console.log(sumOdds(9));  
-console.log(sumOdds(11)); 
+// // Examples:
+// console.log(sumOdds(9));  
+// console.log(sumOdds(11)); 
 
 // i % 2 !== 0 — bu ifoda i toq sonligini tekshiradi.
 
@@ -32,30 +55,30 @@ console.log(sumOdds(11));
 
 
 //Task T
-function mergeSortedArrays(arr1: number[], arr2: number[]): number[] {
-  const mergedArray: number[] = [];
-  let i = 0;
-  let j = 0;
-  while (i < arr1.length && j < arr2.length) {
-    if (arr1[i] < arr2[j]) {
-      mergedArray.push(arr1[i]);
-      i++;
-    } else {
-      mergedArray.push(arr2[j]);
-      j++;
-    }
-  }
-  while (i < arr1.length) {
-    mergedArray.push(arr1[i]);
-    i++;
-  }
-  while (j < arr2.length) {
-    mergedArray.push(arr2[j]);
-    j++;
-  }
-  return mergedArray;
-}
-console.log(mergeSortedArrays([0, 3, 4, 31], [4, 6, 30]));
+// function mergeSortedArrays(arr1: number[], arr2: number[]): number[] {
+//   const mergedArray: number[] = [];
+//   let i = 0;
+//   let j = 0;
+//   while (i < arr1.length && j < arr2.length) {
+//     if (arr1[i] < arr2[j]) {
+//       mergedArray.push(arr1[i]);
+//       i++;
+//     } else {
+//       mergedArray.push(arr2[j]);
+//       j++;
+//     }
+//   }
+//   while (i < arr1.length) {
+//     mergedArray.push(arr1[i]);
+//     i++;
+//   }
+//   while (j < arr2.length) {
+//     mergedArray.push(arr2[j]);
+//     j++;
+//   }
+//   return mergedArray;
+// }
+// console.log(mergeSortedArrays([0, 3, 4, 31], [4, 6, 30]));
 // => [0, 3, 4, 4, 6, 30, 31]
 // TASK S
 
