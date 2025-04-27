@@ -1,3 +1,27 @@
+// TASK W
+
+// Shunday function yozing, u o'ziga parametr sifatida
+// yagona array va number qabul qilsin. Siz tuzgan function
+// arrayni numberda berilgan uzunlikda kesib bo'laklarga
+// ajratgan holatida qaytarsin.
+// MASALAN: chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3);
+// return [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]]; 
+function chunkArray(arr: any[], size: number): any[][] {
+  return arr.reduce((acc: any[][], curr: any, index: number) => {
+      if (index % size === 0) {
+          acc.push(arr.slice(index, index + size));
+      }
+      return acc;
+  }, []);
+}
+const res = chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3);
+console.log(res);
+
+// reduce orqali array ustida yuriladi.
+
+// index % size === 0 bo'lsa, slice orqali kerakli bo'lak olinib acc (accumulator) ga qo‘shiladi.
+
+
 // Task V
 // Shunday function yozing, uni string parametri bo'lsin.
 // Va bu function stringdagi har bir harfni o'zi bilan
@@ -5,22 +29,22 @@
   
 // MASALAN: countChars("hello") return {h: 1, e: 1, l: 2, o: 1}
 
-function countChars(input: string): { [key: string]: number } {
-  const result: { [key: string]: number } = {};
+// function countChars(input: string): { [key: string]: number } {
+//   const result: { [key: string]: number } = {};
 
-  for (const char of input) {
-    if (result[char]) {
-      result[char]++;
-    } else {
-      result[char] = 1;
-    }
-  }
+//   for (const char of input) {
+//     if (result[char]) {
+//       result[char]++;
+//     } else {
+//       result[char] = 1;
+//     }
+//   }
 
-  return result;
-}
+//   return result;
+// }
 
 
-console.log(countChars("hello")); // { h: 1, e: 1, l: 2, o: 1 }
+// console.log(countChars("hello")); // { h: 1, e: 1, l: 2, o: 1 }
 // TASK U
 
 // Shunday function tuzing, uni number parametri bo'lsin.
