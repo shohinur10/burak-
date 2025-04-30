@@ -1,3 +1,43 @@
+// Function to count how many times a key appears in an object (including nested)
+// X-TASK:
+
+//  Shunday function yozing, uni object va string parapetrlari bolsin. Function string parametri object ichida necha marotaba takrorlanganligini qaytarsin (nested object bolsa ham sanasin)
+//  MASALAN: countOccurrences({model: 'Bugatti', steer: {model: 'HANKOOK', size: 30}}, 'model') return 2
+
+function countOccurrences(obj: any, keyToFind: string): number {
+  if (typeof obj !== 'object' || obj === null) return 0;
+
+  let count = 0;
+
+  for (const [key, value] of Object.entries(obj)) {
+    if (key === keyToFind) count++;
+
+    if (typeof value === 'object') {
+      count += countOccurrences(value, keyToFind); // Recursive call
+    }
+  }
+
+  return count;
+}
+const data = {
+  model: 'Bugatti',
+  steer: {
+    model: 'HANKOOK',
+    size: 30
+  },
+  parts: [
+    { model: 'BMW' },
+    { type: 'engine', brand: { model: 'Mercedes' } }
+  ]
+};
+
+
+const keyToSearch = 'model';
+const result = countOccurrences(data, keyToSearch);
+console.log(`Key '${keyToSearch}' appears ${result} times.`);
+
+
+
 // TASK W
 
 // Shunday function yozing, u o'ziga parametr sifatida
@@ -6,16 +46,16 @@
 // ajratgan holatida qaytarsin.
 // MASALAN: chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3);
 // return [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]]; 
-function chunkArray(arr: any[], size: number): any[][] {
-  return arr.reduce((acc: any[][], curr: any, index: number) => {
-      if (index % size === 0) {
-          acc.push(arr.slice(index, index + size));
-      }
-      return acc;
-  }, []);
-}
-const res = chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3);
-console.log(res);
+// function chunkArray(arr: any[], size: number): any[][] {
+//   return arr.reduce((acc: any[][], curr: any, index: number) => {
+//       if (index % size === 0) {
+//           acc.push(arr.slice(index, index + size));
+//       }
+//       return acc;
+//   }, []);
+// }
+// const res = chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3);
+// console.log(res);
 
 // reduce orqali array ustida yuriladi.
 
