@@ -14,10 +14,11 @@ class AuthService {
         return new Promise((resolve, reject)=> {
             const duration =`${AUTH_TIMER}h`;
             jwt.sign(
-                payload,
-                process.env.SECRET_TOKEN as string,
+                payload,      // user info stored in token (NEVER password!)
+                process.env.SECRET_TOKEN as string,    // your secret key (keep safe!)
                 {
-                 expiresIn: duration,
+                 expiresIn: duration,   // expiration time
+
                 },
                 (err, token)=> {
                     if (err)
