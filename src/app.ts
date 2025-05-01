@@ -4,7 +4,7 @@ import router from "../src/router";
 import routerAdmin from "./router-admin";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
-import {MORGAN_FORMAT} from "./libs/config";
+import {MORGAN_FORMAT} from "./libs/utils/config";
 
 import session from "express-session";//foydalanuvchi ma'lumotlarini vaqtincha saqlash) uchun ishlatiladi.
 import ConnectMongoDB from "connect-mongodb-session";//Session ma'lumotlarini MongoDB bazasida saqlash uchun ishlatiladi.
@@ -22,6 +22,7 @@ const store = new MongoDBStore({
 // 1- Entrance 
 const app = express();
 app.use(express.static(path.join(__dirname, 'public'))); // Middleware Design Pattern => public API
+app.use("/uploads",express.static("./uploads"));
 app.use(express.urlencoded({ extended: true }));  // Middleware Design Pattern => Traditional API
 app.use(express.json());  // Middleware Design Pattern => Rest API
 app.use(cookieParser());

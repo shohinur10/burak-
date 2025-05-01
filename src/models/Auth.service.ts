@@ -1,5 +1,5 @@
-import Errors, { HttpCode ,Message } from "../libs/Errors";
-import { AUTH_TIMER } from "../libs/config";
+import Errors, { HttpCode ,Message } from "../libs/utils/Errors";
+import { AUTH_TIMER } from "../libs/utils/config";
 import { Member } from "../libs/types/member";
 import  jwt  from "jsonwebtoken";
 

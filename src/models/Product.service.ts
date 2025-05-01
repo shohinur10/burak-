@@ -1,8 +1,8 @@
 
 import { Product, ProductInput, ProductUpdateInput } from "../libs/types/product";
 import ProductModel from "../schema/Product.model";
-import Errors, { HttpCode, Message } from "../libs/Errors";
-import { shapeIntoMongooseObjectId } from "../libs/config";
+import Errors, { HttpCode, Message } from "../libs/utils/Errors";
+import { shapeIntoMongooseObjectId } from "../libs/utils/config";
 
     class ProductService {
       static updateChosenProduct(id: string, body: any) {

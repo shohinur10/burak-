@@ -1,13 +1,13 @@
 import { NextFunction, Request, Response } from "express";
 import { T } from "../libs/types/common";
-import { MemberInput,Member,LoginInput, ExtendedRequest } from "../libs/types/member";
+import { MemberInput, Member, LoginInput, ExtendedRequest, MemberUpdateInput } from '../libs/types/member';
 import MemberService from "../models/Member.service";
-import Errors, { HttpCode } from "../libs/Errors";
+import Errors, { HttpCode } from "../libs/utils/Errors";
 import AuthService from "../models/Auth.service";
-import { AUTH_TIMER } from "../libs/config";
-import { Message } from '../libs/Errors';
+import { AUTH_TIMER } from "../libs/utils/config";
+import { Message } from '../libs/utils/Errors';
 
-// REACT uchun ishleydu togrirogi SPA
+// REACT uchun ishleydu togrirogi SPA 
 
  const memberService = new MemberService();
  const authService = new AuthService();
@@ -79,6 +79,22 @@ memberController.getMemberDetails =  async (req: ExtendedRequest, res: Response)
  res.status(HttpCode.OK).json(result);
   }catch (err) {
     console.log("Error, getMemberDetails:", err);
+    if(err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standard.code).json(Errors.standard);
+}
+};
+
+
+
+memberController.updateMember = async (req: ExtendedRequest, res:Response) =>{
+try{
+  console.log("updateMember");
+  const input : MemberUpdateInput = req.body;
+  if (req.file) input.memberImage =req.file.path;
+  const result = await memberService.updateMember(req.member, input);
+  res.status(HttpCode.OK).json(result);
+}catch (err) {
+    console.log("Error, updateMember:", err);
     if(err instanceof Errors) res.status(err.code).json(err);
     else res.status(Errors.standard.code).json(Errors.standard);
 }
