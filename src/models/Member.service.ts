@@ -81,6 +81,20 @@ public async updateMember (
   return result.toObject() as Member;
 }
 
+public async getTopUsers(): Promise<Member[]> {
+  const result = await this.memberModel.find({
+    memberStatus: MemberStatus.ACTIVE,
+    memberPoints: { $gte: 1 },
+  })
+  .sort({ memberPoints: -1 }) // Corrected sorting field
+  .limit(4)
+  .exec();
+
+  if (!result || result.length === 0) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+  return result.map(doc => doc.toObject() as Member);
+}
+
 
   /** SSR Signup */
   public async processSignup(input: MemberInput): Promise<Member> {
