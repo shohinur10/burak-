@@ -1,40 +1,55 @@
+// Y-TASK:
+
+//  Shunday function yozing, uni 2 ta array parapetri bolsin. Function ikkala arrayda ham ishtirok etgan qiymatlarni bir arrayda qaytarsin
+//  MASALAN: findIntersection([1,2,3], [3,2,0]) return [2,3]
+
+function findIntersection(arr1: number[], arr2: number[]): number[] {
+  const set2 = new Set(arr2);
+  const result = arr1.filter(item => set2.has(item));
+  return Array.from(new Set(result)); 
+}
+
+
+console.log(findIntersection([1, 2, 3], [3, 2, 0])); // [2, 3]
+
+
 // Function to count how many times a key appears in an object (including nested)
 // X-TASK:
 
 //  Shunday function yozing, uni object va string parapetrlari bolsin. Function string parametri object ichida necha marotaba takrorlanganligini qaytarsin (nested object bolsa ham sanasin)
 //  MASALAN: countOccurrences({model: 'Bugatti', steer: {model: 'HANKOOK', size: 30}}, 'model') return 2
 
-function countOccurrences(obj: any, keyToFind: string): number {
-  if (typeof obj !== 'object' || obj === null) return 0;
+// function countOccurrences(obj: any, keyToFind: string): number {
+//   if (typeof obj !== 'object' || obj === null) return 0;
 
-  let count = 0;
+//   let count = 0;
 
-  for (const [key, value] of Object.entries(obj)) {
-    if (key === keyToFind) count++;
+//   for (const [key, value] of Object.entries(obj)) {
+//     if (key === keyToFind) count++;
 
-    if (typeof value === 'object') {
-      count += countOccurrences(value, keyToFind); // Recursive call
-    }
-  }
+//     if (typeof value === 'object') {
+//       count += countOccurrences(value, keyToFind); // Recursive call
+//     }
+//   }
 
-  return count;
-}
-const data = {
-  model: 'Bugatti',
-  steer: {
-    model: 'HANKOOK',
-    size: 30
-  },
-  parts: [
-    { model: 'BMW' },
-    { type: 'engine', brand: { model: 'Mercedes' } }
-  ]
-};
+//   return count;
+// }
+// const data = {
+//   model: 'Bugatti',
+//   steer: {
+//     model: 'HANKOOK',
+//     size: 30
+//   },
+//   parts: [
+//     { model: 'BMW' },
+//     { type: 'engine', brand: { model: 'Mercedes' } }
+//   ]
+// };
 
 
-const keyToSearch = 'model';
-const result = countOccurrences(data, keyToSearch);
-console.log(`Key '${keyToSearch}' appears ${result} times.`);
+// const keyToSearch = 'model';
+// const result = countOccurrences(data, keyToSearch);
+// console.log(`Key '${keyToSearch}' appears ${result} times.`);
 
 
 
