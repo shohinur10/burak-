@@ -1,4 +1,4 @@
 
 export enum ViewGroup{
-    Product = "Product",
+    PRODUCT = "PRODUCT",
 }
