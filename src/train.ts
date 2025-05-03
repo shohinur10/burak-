@@ -1,16 +1,39 @@
+// TASK Z
+
+// Shunday function yozing. Bu function sonlardan iborat array
+// qabul qilsin. Function'ning vazifasi array tarkibidagi juft
+// sonlarni topib ularni yig'disini qaytarsin.
+
+// MASALAN:
+// sumEvens([1, 2, 3]); return 2;
+// sumEvens([1, 2, 3, 2]); return 4;
+
+
+
+function sumEvens(arr: number[]): number {
+  let sum = 0;
+  for (let num of arr) {
+    if (num % 2 === 0) {
+      sum += num;
+    }
+  }
+  return sum;
+}
+console.log(sumEvens([1, 2, 3]));
+
 // Y-TASK:
 
 //  Shunday function yozing, uni 2 ta array parapetri bolsin. Function ikkala arrayda ham ishtirok etgan qiymatlarni bir arrayda qaytarsin
 //  MASALAN: findIntersection([1,2,3], [3,2,0]) return [2,3]
 
-function findIntersection(arr1: number[], arr2: number[]): number[] {
-  const set2 = new Set(arr2);
-  const result = arr1.filter(item => set2.has(item));
-  return Array.from(new Set(result)); 
-}
+// function findIntersection(arr1: number[], arr2: number[]): number[] {
+//   const set2 = new Set(arr2);
+//   const result = arr1.filter(item => set2.has(item));
+//   return Array.from(new Set(result)); 
+// }
 
 
-console.log(findIntersection([1, 2, 3], [3, 2, 0])); // [2, 3]
+// console.log(findIntersection([1, 2, 3], [3, 2, 0])); // [2, 3]
 
 
 // Function to count how many times a key appears in an object (including nested)
