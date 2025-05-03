@@ -21,8 +21,8 @@ const store = new MongoDBStore({
 
 // 1- Entrance 
 const app = express();
-app.use(express.static(path.join(__dirname, 'public'))); // Middleware Design Pattern => public API
-app.use("/uploads",express.static("./uploads"));
+app.use(express.static(path.join(__dirname, 'public'))); // Middleware Design Pattern => public
+app.use("/uploads", express.static("../uploads/members"))
 app.use(express.urlencoded({ extended: true }));  // Middleware Design Pattern => Traditional API
 app.use(express.json());  // Middleware Design Pattern => Rest API
 app.use(cookieParser());
