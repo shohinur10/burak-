@@ -5,6 +5,7 @@ import Errors, { HttpCode, Message } from "../libs/utils/Errors";
 import { shapeIntoMongooseObjectId } from "../libs/utils/config";
 import { ProductStatus } from "../libs/enums/product.enum";
 import { T } from "../libs/types/common";
+import { ObjectId } from "mongoose";
 
     class ProductService {
       static updateChosenProduct(id: string, body: any) {
@@ -36,7 +37,7 @@ import { T } from "../libs/types/common";
 
         const result  = await this.productModel
         .aggregate([
-          { $match: match },
+          { $match: match },  // bu mongoDb syntax
           { $sort: sort },
           { $skip: (inquiry.page * 1 - 1) * inquiry.limit },
           { $limit: inquiry.limit * 1 },
@@ -45,6 +46,19 @@ import { T } from "../libs/types/common";
         if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
 
       return result;
+    }
+
+    public async getProduct(memberId: ObjectId | null, id: string): Promise<Product> {
+      const  productId = shapeIntoMongooseObjectId(id);
+
+
+      let result = await this.productModel
+        .findOne({ _id: productId, ProductStatus: ProductStatus.PROCESS,})
+        .exec();
+      if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+      return result.toObject() as Product;
+
     }
 
     /** SSR */
