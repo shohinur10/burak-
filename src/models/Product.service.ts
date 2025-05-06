@@ -35,7 +35,7 @@ import ViewService from "./View.service";
         match.productCollection = inquiry.productCollection;
       if (inquiry.search)
       match.productName ={
-      $regex:new RegExp(inquiry.search, "i")};
+      $regex:new RegExp(inquiry.search, "i")}; // regular expression  case-intensive "I"
         const sort: T =
           inquiry.order === "productPrice"
             ? { [inquiry.order]: 1 }
@@ -45,7 +45,7 @@ import ViewService from "./View.service";
         .aggregate([
           { $match: match},  // bu mongoDb syntax
           { $sort: sort },
-          { $skip: (inquiry.page * 1 - 1) * inquiry.limit },
+          { $skip: (inquiry.page * 1 - 1) * inquiry.limit }, //$skip: skips documents for pagination ((page - 1) * limit)
           { $limit: inquiry.limit * 1 },
         ])
        .exec();
@@ -82,9 +82,9 @@ import ViewService from "./View.service";
 
               // Increase Counts
               result = await this.productModel.findByIdAndUpdate(
-                  productId,
-                  { $inc: { productViews: +1 }},
-                  { new: true }
+                  productId,  // filter
+                  { $inc: { productViews: +1 }}, // update
+                  { new: true }   // option
               );
           }
 
