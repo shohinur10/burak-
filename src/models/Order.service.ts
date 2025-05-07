@@ -1,21 +1,24 @@
-import {Order, OrderInquiry, OrderItemInput } from "../libs/types/order";
-import { Member } from "../libs/types/member";
+import {Order, OrderInquiry, OrderItemInput, OrderUpdateInput } from "../libs/types/order";
+import { Member, MemberUpdateInput } from "../libs/types/member";
 import OrderModel from "../schema/Order.model";
 import OrderItemModel from "../schema/OrderItem.model";
 import { shapeIntoMongooseObjectId } from "../libs/utils/config";
 import Errors, { HttpCode, Message } from "../libs/utils/Errors";
 import { ObjectId } from "mongoose";
-import { OrderStatus } from "../libs/enums/order.enum";
+import { OrderStatus } from '../libs/enums/order.enum';
+import MemberService from './Member.service';
 
 
 
 class OrderService{
     private readonly orderModel;
     private readonly orderItemModel;
+    private readonly MemberService;
 
      constructor(){
         this.orderModel = OrderModel;
         this.orderItemModel = OrderItemModel;
+        this.MemberService = new MemberService();
      }
 public async createOrder(member:Member, input:OrderItemInput[]): Promise<Order> {
     const memberId = shapeIntoMongooseObjectId(member._id);
@@ -83,5 +86,30 @@ public async getMyOrders(member:Member,inquiry: OrderInquiry): Promise<Order[]> 
  
     return result;
  }
+  public async updateOrder (member: Member, input: OrderUpdateInput): Promise<Order>{
+    const memberId = shapeIntoMongooseObjectId(member._id),
+    orderId = shapeIntoMongooseObjectId(input.orderId);
+    const orderStatus = input.orderStatus;
+
+
+    const result = await  this.orderModel.findByIdAndUpdate({
+        memberId: memberId,
+        _id: orderId,
+    },{OrderStatus: OrderStatus}, 
+    {new: true}
+)
+.exec();
+
+if(!result) throw new Errors(HttpCode.NOT_FOUND, Message.UPDATE_FAILED);
+// ordersttaus pause => process  1 point berishim kerak 
+if (orderStatus === OrderStatus.PROCESS) {
+    await this.MemberService.updateMember(member, {
+        _id: member._id,
+        memberPoint: member.memberPoint + 1
+    });
+}
+
+return result.toObject() as Order;
+  }
 }
 export default OrderService;

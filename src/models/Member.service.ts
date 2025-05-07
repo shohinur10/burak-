@@ -105,6 +105,21 @@ public async getTopUsers(): Promise<Member[]> {
   return result.map(doc => doc.toObject() as Member);
 }
 
+public async addUserPoint(member: Member, point: number): Promise <Member>{
+  const memberId = shapeIntoMongooseObjectId(member._id);
+
+  const result = await this.memberModel.findByIdAndUpdate(
+    {_id:memberId,
+      memberType: MemberType.USER, 
+      memberStatus: MemberStatus.ACTIVE
+    }, 
+    {$inc:{memberPoints: point}},//$inc: MongoDB operator to increment memberPoints by the given amount.
+     {new: true },).exec();//{ new: true }: Returns the updated document instead of the old one.
+
+  if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+  return result.toObject() as Member;
+
+}
 
   /** SSR Signup */
   public async processSignup(input: MemberInput): Promise<Member> {

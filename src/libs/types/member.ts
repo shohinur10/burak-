@@ -40,6 +40,7 @@ export interface MemberUpdateInput {
         memberDesc?: string; // Optional
         memberAddress?: string; // Optional
         memberImage?: string; // Optional
+        memberPoint?: number; // Optional
 }
 export interface ExtendedRequest extends Request {
     member: Member;
