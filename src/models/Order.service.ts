@@ -11,6 +11,9 @@ import MemberService from './Member.service';
 
 
 class OrderService{
+  static updateOrder(member: Member, input: OrderUpdateInput) {
+    throw new Error("Method not implemented.");
+  }
     private readonly orderModel;
     private readonly orderItemModel;
     private readonly MemberService;
@@ -86,30 +89,28 @@ public async getMyOrders(member:Member,inquiry: OrderInquiry): Promise<Order[]> 
  
     return result;
  }
-  public async updateOrder (member: Member, input: OrderUpdateInput): Promise<Order>{
+ public async updateOrder (member: Member, input: OrderUpdateInput): Promise<Order>{
     const memberId = shapeIntoMongooseObjectId(member._id),
-    orderId = shapeIntoMongooseObjectId(input.orderId);
-    const orderStatus = input.orderStatus;
+    orderId = shapeIntoMongooseObjectId(input.orderId),
+     orderStatus = input.orderStatus;
 
 
-    const result = await  this.orderModel.findByIdAndUpdate({
+    const result = await  this.orderModel.findOneAndUpdate({
         memberId: memberId,
-        _id: orderId,
-    },{OrderStatus: OrderStatus}, 
+        _id: orderId,},
+        {orderStatus: orderStatus}, 
     {new: true}
-)
-.exec();
+).exec();
 
 if(!result) throw new Errors(HttpCode.NOT_FOUND, Message.UPDATE_FAILED);
-// ordersttaus pause => process  1 point berishim kerak 
+// // ordersttaus pause => process  1 point berishim kerak 
 if (orderStatus === OrderStatus.PROCESS) {
-    await this.MemberService.updateMember(member, {
-        _id: member._id,
-        memberPoint: member.memberPoint + 1
-    });
-}
+    await this.MemberService.addUserPoint(member);
+    }
+
 
 return result.toObject() as Order;
-  }
+ }
 }
+
 export default OrderService;

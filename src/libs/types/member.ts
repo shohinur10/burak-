@@ -11,7 +11,7 @@ export interface MemberInput {
     memberDesc?: string; // Optional
     memberAddress?: string; // Optional
     memberImage?: string; // Optional
-    memberPoint?: number; // Optional
+    memberPoints?: number; // Optional
 }
 export interface Member {
 _id: ObjectId;
@@ -23,7 +23,7 @@ _id: ObjectId;
     memberDesc?: string; // Optional
     memberAddress?: string; // Optional
     memberImage?: string; // Optional
-    memberPoint: number; // Optional
+    memberPoints: number; // Optional
     createAt: Date; // Required
     updatedAt: Date; // Optional (corrected from 'updete')
 } 
@@ -40,7 +40,7 @@ export interface MemberUpdateInput {
         memberDesc?: string; // Optional
         memberAddress?: string; // Optional
         memberImage?: string; // Optional
-        memberPoint?: number; // Optional
+        memberPoints?: number; // Optional
 }
 export interface ExtendedRequest extends Request {
     member: Member;

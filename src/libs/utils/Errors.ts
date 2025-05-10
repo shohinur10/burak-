@@ -21,6 +21,7 @@ export enum Message {
     CREATION_FAILED = "CREATION_FAILED",
     TOKEN_CREATION_FAILED ="Token creation errors!",
     NOT_FOUND = "NOT_FOUND",
+    INVALID_POINT = "INVALID_POINT",
 }
 
 class Errors extends Error {

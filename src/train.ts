@@ -1,18 +1,27 @@
-// ZA-TASK:
+
+
+function randomBetween(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+const randomNumber = randomBetween(30, 50);
+
+console.log(`Random number between 30 and 50: ${randomNumber}`);// ZA-TASK:
 
 // Shunday function yozing, u array ichidagi objectlarni “age” qiymati boyicha sortlab bersin. 
 // MASALAN: sortByAge([{age:23}, {age:21}, {age:13}]) return [{age:13}, {age:21}, {age:23}]
 
-type Person = {age: number;};
+// type Person = {age: number;};
 
-function sortByAge(arr: Person[]): Person[] {
-  return arr.sort((a, b) => a.age - b.age);
-}
+// function sortByAge(arr: Person[]): Person[] {
+//   return arr.sort((a, b) => a.age - b.age);
+// }
 
 
-const people = [{ age: 23 }, { age: 21 }, { age: 13 }];
-const sortedPeople = sortByAge(people);
-console.log(sortedPeople);
+// const people = [{ age: 23 }, { age: 21 }, { age: 13 }];
+// const sortedPeople = sortByAge(people);
+// console.log(sortedPeople);
 
 // TASK Z
 
