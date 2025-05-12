@@ -1,13 +1,21 @@
-
-
-function randomBetween(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+function changeNumberInArray(index: number, arr: number[], newValue: number): number[] {
+  if (index >= 0 && index < arr.length) {
+      arr[index] = newValue;
+  }
+  return arr;
 }
 
+// Misol:
+console.log(changeNumberInArray(1, [1, 3, 7, 2], 2));
 
-const randomNumber = randomBetween(30, 50);
+// function randomBetween(min: number, max: number): number {
+//   return Math.floor(Math.random() * (max - min + 1)) + min;
+// }
 
-console.log(`Random number between 30 and 50: ${randomNumber}`);// ZA-TASK:
+
+// const randomNumber = randomBetween(30, 50);
+
+// console.log(`Random number between 30 and 50: ${randomNumber}`);// ZA-TASK:
 
 // Shunday function yozing, u array ichidagi objectlarni “age” qiymati boyicha sortlab bersin. 
 // MASALAN: sortByAge([{age:23}, {age:21}, {age:13}]) return [{age:13}, {age:21}, {age:23}]
