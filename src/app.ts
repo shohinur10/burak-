@@ -1,3 +1,4 @@
+import cors from "cors"; // CORS - Cross-Origin Resource Sharing
 import express from "express";
 import path from "path";
 import router from "../src/router";
@@ -24,7 +25,8 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'public'))); // Middleware Design Pattern => public
 app.use("/uploads", express.static("../uploads/members"))
 app.use(express.urlencoded({ extended: true }));  // Middleware Design Pattern => Traditional API
-app.use(express.json());  // Middleware Design Pattern => Rest API
+app.use(express.json()); 
+app.use(cors({ credentials: true, origin: true})); // Middleware Design Pattern => Rest API
 app.use(cookieParser());
 app.use(morgan(MORGAN_FORMAT)); // har bir  htpp faylgan jonatilgan log uchun ketgan vaqtdi console,logda korsatadi 
 

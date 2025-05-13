@@ -30,7 +30,7 @@ import ViewService from "./View.service";
 
     /** SPA */
     public async getProducts(inquiry: ProductInquiry): Promise<Product[]>{
-      const match: T ={ProductStatus: ProductStatus.PROCESS};
+      const match: T ={};
       if (inquiry.productCollection)
         match.productCollection = inquiry.productCollection;
       if (inquiry.search)
