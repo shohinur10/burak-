@@ -1,12 +1,29 @@
-function changeNumberInArray(index: number, arr: number[], newValue: number): number[] {
-  if (index >= 0 && index < arr.length) {
-      arr[index] = newValue;
+
+function removeDuplicate(str: string): string {
+  let result = '';
+  const seen = new Set<string>();
+
+  for (const char of str) {
+      if (!seen.has(char)) {
+          result += char;
+          seen.add(char);
+      }
   }
-  return arr;
+
+  return result;
 }
 
-// Misol:
-console.log(changeNumberInArray(1, [1, 3, 7, 2], 2));
+
+console.log(removeDuplicate("stringg"));  
+// function changeNumberInArray(index: number, arr: number[], newValue: number): number[] {
+//   if (index >= 0 && index < arr.length) {
+//       arr[index] = newValue;
+//   }
+//   return arr;
+// }
+
+// // Misol:
+// console.log(changeNumberInArray(1, [1, 3, 7, 2], 2));
 
 // function randomBetween(min: number, max: number): number {
 //   return Math.floor(Math.random() * (max - min + 1)) + min;
