@@ -43,7 +43,7 @@ const productSchema = new Schema(
     productDesc: {
       type: String,
     },
-    productImage: {
+    productImages: {
       type: [String],
       default: [],
     },
