@@ -1,20 +1,35 @@
-
-function removeDuplicate(str: string): string {
-  let result = '';
-  const seen = new Set<string>();
-
-  for (const char of str) {
-      if (!seen.has(char)) {
-          result += char;
-          seen.add(char);
+function capitalizeWords(str: string): string {
+  return str
+    .split(" ")
+    .map((word: string) => {
+      if (word.length <= 2) {
+        return word;
       }
-  }
-
-  return result;
+      return word[0].toUpperCase() + word.slice(1);
+    })
+    .join(" ");
 }
 
 
-console.log(removeDuplicate("stringg"));  
+console.log(capitalizeWords("name should be a string"));
+
+
+// function removeDuplicate(str: string): string {
+//   let result = '';
+//   const seen = new Set<string>();
+
+//   for (const char of str) {
+//       if (!seen.has(char)) {
+//           result += char;
+//           seen.add(char);
+//       }
+//   }
+
+//   return result;
+// }
+
+
+// console.log(removeDuplicate("stringg"));  
 // function changeNumberInArray(index: number, arr: number[], newValue: number): number[] {
 //   if (index >= 0 && index < arr.length) {
 //       arr[index] = newValue;
