@@ -1,17 +1,31 @@
-function capitalizeWords(str: string): string {
-  return str
-    .split(" ")
-    .map((word: string) => {
-      if (word.length <= 2) {
-        return word;
-      }
-      return word[0].toUpperCase() + word.slice(1);
-    })
-    .join(" ");
+function capitalizeWords(input: string): string {
+  if (typeof input !== 'string') {
+    throw new Error("Input must be a string");
+  }
+  
+  return input
+    .trim()
+    .toLowerCase()
+    .split(/\s+/) 
+    .join('_');
 }
 
+console.log(capitalizeWords('name should be a string')); // 'name_should_be_a_string'
 
-console.log(capitalizeWords("name should be a string"));
+// function capitalizeWords(str: string): string {
+//   return str
+//     .split(" ")
+//     .map((word: string) => {
+//       if (word.length <= 2) {
+//         return word;
+//       }
+//       return word[0].toUpperCase() + word.slice(1);
+//     })
+//     .join(" ");
+// }
+
+
+// console.log(capitalizeWords("name should be a string"));
 
 
 // function removeDuplicate(str: string): string {

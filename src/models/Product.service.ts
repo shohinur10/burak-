@@ -98,15 +98,13 @@ import ViewService from "./View.service";
   }
 
     /** SSR */
-    public async getAllProducts(): Promise <Product[]>{
-      // Promise bu shu funksiyani natijasi 
-      //Model: productModel;
-      //Query: this .productModel.find();
-      //Query++++:exec();:
-    const result = await this.productModel.find().exec();
-    if (!result) throw new Errors(HttpCode.NOT_FOUND,Message.NO_DATA_FOUND) ;
-    return result as unknown as Product[];
-}
+    public async getAllProducts(): Promise<Product[]>{
+      const result = await this.productModel.find().exec();
+      if(!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
+
+       return result;
+
+  }
 
 public async createNewProduct(input: ProductInput): Promise<Product> {
     try {
