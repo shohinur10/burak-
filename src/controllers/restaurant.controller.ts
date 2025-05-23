@@ -45,26 +45,27 @@ restaurantController.processSignup = async (
   res: Response
 ) => {
   try {
-    console.log("Process Signup");
+    console.log("processSignup");
+    console.log("req.body:", req.body);
     const file = req.file;
     if (!file)
       throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
+
     const newMember: MemberInput = req.body;
-    newMember.memberImage = file?.path,
+    newMember.memberImage = file?.path;
     newMember.memberType = MemberType.RESTAURANT;
-
     const result = await memberService.processSignup(newMember);
-
+    //TODO: SESSIONS AUTHENTICATION
     req.session.member = result;
     req.session.save(function () {
       res.redirect("/admin/product/all");
     });
   } catch (err) {
-    console.log("Error, processSignup:", err);
+    console.log("ERROR, processSignup", err);
     const message =
       err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
     res.send(
-      `<script> alert("${message}") window.location.replace('/admin/signup') <script> `
+      `<script> alert("${message}"); window.location.replace('/admin/signup') </script>`
     );
   }
 };

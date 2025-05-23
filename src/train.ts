@@ -1,16 +1,25 @@
-function capitalizeWords(input: string): string {
-  if (typeof input !== 'string') {
-    throw new Error("Input must be a string");
-  }
-  
-  return input
-    .trim()
-    .toLowerCase()
-    .split(/\s+/) 
-    .join('_');
-}
 
-console.log(capitalizeWords('name should be a string')); // 'name_should_be_a_string'
+
+function delayHelloWorld(message: string): Promise<string> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(message);
+    }, 3000); // 3 soniya (3000 millisekund)
+  });
+}
+// function capitalizeWords(input: string): string {
+//   if (typeof input !== 'string') {
+//     throw new Error("Input must be a string");
+//   }
+  
+//   return input
+//     .trim()
+//     .toLowerCase()
+//     .split(/\s+/) 
+//     .join('_');
+// }
+
+// console.log(capitalizeWords('name should be a string')); // 'name_should_be_a_string'
 
 // function capitalizeWords(str: string): string {
 //   return str
