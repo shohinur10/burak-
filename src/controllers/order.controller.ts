@@ -30,7 +30,7 @@ orderController.getMyOrders = async (req: ExtendedRequest, res: Response) => {
       console.log("getMyOrders");
       const page = Number(req.query.page) || 1;
       const limit = Math.max(Number(req.query.limit) || 5, 1); // Enforce minimum of 1
-      const orderStatus = (req.query.OrderStatus as OrderStatus | undefined) || OrderStatus.PAUSE;
+      const orderStatus = (req.query.orderStatus as OrderStatus | undefined) || OrderStatus.PAUSE;
 
       const inquiry: OrderInquiry = {
         page,
