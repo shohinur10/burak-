@@ -1,12 +1,21 @@
 
+function reduceNestedArray(arr: any[]): number {
+  let sum = 0;
 
-function delayHelloWorld(message: string): Promise<string> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(message);
-    }, 3000); // 3 soniya (3000 millisekund)
-  });
+  for (const item of arr) {
+    if (typeof item === "number") {
+      sum += item;
+    } else if (Array.isArray(item)) {
+      sum += reduceNestedArray(item); // Rekursiv chaqiriq
+    }
+  }
+
+  return sum;
 }
+
+const result = reduceNestedArray([1, [1, 2, [4]]]);
+console.log(result); // Natija: 8
+
 // function capitalizeWords(input: string): string {
 //   if (typeof input !== 'string') {
 //     throw new Error("Input must be a string");
