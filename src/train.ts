@@ -1,20 +1,34 @@
+function printNumbers(): void {
+  let count = 1;
+  
+  const intervalId = setInterval(() => {
+    console.log(count);
+    count++;
 
-function reduceNestedArray(arr: any[]): number {
-  let sum = 0;
-
-  for (const item of arr) {
-    if (typeof item === "number") {
-      sum += item;
-    } else if (Array.isArray(item)) {
-      sum += reduceNestedArray(item); // Rekursiv chaqiriq
+    if (count > 5) {
+      clearInterval(intervalId);
     }
-  }
-
-  return sum;
+  }, 1000); // Har 1 soniyada ishlaydi
 }
 
-const result = reduceNestedArray([1, [1, 2, [4]]]);
-console.log(result); // Natija: 8
+printNumbers();
+
+// function reduceNestedArray(arr: any[]): number {
+//   let sum = 0;
+
+//   for (const item of arr) {
+//     if (typeof item === "number") {
+//       sum += item;
+//     } else if (Array.isArray(item)) {
+//       sum += reduceNestedArray(item); // Rekursiv chaqiriq
+//     }
+//   }
+
+//   return sum;
+// }
+
+// const result = reduceNestedArray([1, [1, 2, [4]]]);
+// console.log(result); // Natija: 8
 
 // function capitalizeWords(input: string): string {
 //   if (typeof input !== 'string') {
