@@ -1,17 +1,26 @@
-function printNumbers(): void {
-  let count = 1;
-  
-  const intervalId = setInterval(() => {
-    console.log(count);
-    count++;
-
-    if (count > 5) {
-      clearInterval(intervalId);
-    }
-  }, 1000); // Har 1 soniyada ishlaydi
+function reverseInteger(num: number): number {
+  const reversedStr = Math.abs(num).toString().split('').reverse().join('');
+  const reversedNum = parseInt(reversedStr);
+  return num < 0 ? -reversedNum : reversedNum;
 }
 
-printNumbers();
+
+console.log(reverseInteger(123456789)); 
+console.log(reverseInteger(-1234));
+// function printNumbers(): void {
+//   let count = 1;
+  
+//   const intervalId = setInterval(() => {
+//     console.log(count);
+//     count++;
+
+//     if (count > 5) {
+//       clearInterval(intervalId);
+//     }
+//   }, 1000); // Har 1 soniyada ishlaydi
+// }
+
+// printNumbers();
 
 // function reduceNestedArray(arr: any[]): number {
 //   let sum = 0;
