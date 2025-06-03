@@ -1,12 +1,26 @@
-function reverseInteger(num: number): number {
-  const reversedStr = Math.abs(num).toString().split('').reverse().join('');
-  const reversedNum = parseInt(reversedStr);
-  return num < 0 ? -reversedNum : reversedNum;
+function rotateArray(arr: number[], index: number): number[] {
+  if (index < 0 || index > arr.length) {
+    throw new Error("Index is out of bounds");
+  }
+
+  const tail = arr.slice(-index); // oxiridan index ta element
+  const head = arr.slice(0, arr.length - index); // qolgan boshlanishi
+
+  return tail.concat(head); // oxirini oldinga olib kelish
 }
 
 
-console.log(reverseInteger(123456789)); 
-console.log(reverseInteger(-1234));
+console.log(rotateArray([1, 2, 3, 4, 5, 6], 3));
+
+// function reverseInteger(num: number): number {
+//   const reversedStr = Math.abs(num).toString().split('').reverse().join('');
+//   const reversedNum = parseInt(reversedStr);
+//   return num < 0 ? -reversedNum : reversedNum;
+// }
+
+
+// console.log(reverseInteger(123456789)); 
+// console.log(reverseInteger(-1234));
 // function printNumbers(): void {
 //   let count = 1;
   
