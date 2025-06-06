@@ -1,16 +1,40 @@
-function rotateArray(arr: number[], index: number): number[] {
-  if (index < 0 || index > arr.length) {
-    throw new Error("Index is out of bounds");
+function areParenthesesBalanced(input: string): boolean {
+  let count = 0;
+
+  for (const char of input) {
+    if (char === '(') {
+      count++;
+    } else if (char === ')') {
+      count--;
+      // Agar yopilayotgan qavs ochilganidan ko‘p bo‘lsa — noto‘g‘ri
+      if (count < 0) {
+        return false;
+      }
+    }
   }
 
-  const tail = arr.slice(-index); // oxiridan index ta element
-  const head = arr.slice(0, arr.length - index); // qolgan boshlanishi
-
-  return tail.concat(head); // oxirini oldinga olib kelish
+  // Oxirida ochilgan va yopilganlar teng bo‘lsa — balansda
+  return count === 0;
 }
 
+// Test
+console.log(areParenthesesBalanced("string()ichida(qavslar)soni()balansda"));
+console.log(areParenthesesBalanced("no(balance(")); // false
+console.log(areParenthesesBalanced(")(")); // false
 
-console.log(rotateArray([1, 2, 3, 4, 5, 6], 3));
+// function rotateArray(arr: number[], index: number): number[] {
+//   if (index < 0 || index > arr.length) {
+//     throw new Error("Index is out of bounds");
+//   }a
+
+//   const tail = arr.slice(-index); // oxiridan index ta element
+//   const head = arr.slice(0, arr.length - index); // qolgan boshlanishi
+
+//   return tail.concat(head); // oxirini oldinga olib kelish
+// }
+
+
+// console.log(rotateArray([1, 2, 3, 4, 5, 6], 3));
 
 // function reverseInteger(num: number): number {
 //   const reversedStr = Math.abs(num).toString().split('').reverse().join('');
