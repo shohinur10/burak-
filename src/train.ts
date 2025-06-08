@@ -1,26 +1,45 @@
-function areParenthesesBalanced(input: string): boolean {
-  let count = 0;
+
+function countNumberAndLetters(input: string): { number: number; letter: number } {
+  let numberCount = 0;
+  let letterCount = 0;
 
   for (const char of input) {
-    if (char === '(') {
-      count++;
-    } else if (char === ')') {
-      count--;
-      // Agar yopilayotgan qavs ochilganidan ko‘p bo‘lsa — noto‘g‘ri
-      if (count < 0) {
-        return false;
-      }
+    if (char >= '0' && char <= '9') {
+      numberCount++;
+    } else if ((char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z')) {
+      letterCount++;
     }
   }
 
-  // Oxirida ochilgan va yopilganlar teng bo‘lsa — balansda
-  return count === 0;
+  return { number: numberCount, letter: letterCount };
 }
 
-// Test
-console.log(areParenthesesBalanced("string()ichida(qavslar)soni()balansda"));
-console.log(areParenthesesBalanced("no(balance(")); // false
-console.log(areParenthesesBalanced(")(")); // false
+// Test misol
+console.log(countNumberAndLetters("string152%\\¥")); 
+
+// function areParenthesesBalanced(input: string): boolean {
+//   let count = 0;
+
+//   for (const char of input) {
+//     if (char === '(') {
+//       count++;
+//     } else if (char === ')') {
+//       count--;
+//       // Agar yopilayotgan qavs ochilganidan ko‘p bo‘lsa — noto‘g‘ri
+//       if (count < 0) {
+//         return false;
+//       }
+//     }
+//   }
+
+//   // Oxirida ochilgan va yopilganlar teng bo‘lsa — balansda
+//   return count === 0;
+// }
+
+// // Test
+// console.log(areParenthesesBalanced("string()ichida(qavslar)soni()balansda"));
+// console.log(areParenthesesBalanced("no(balance(")); // false
+// console.log(areParenthesesBalanced(")(")); // false
 
 // function rotateArray(arr: number[], index: number): number[] {
 //   if (index < 0 || index > arr.length) {
