@@ -1,21 +1,39 @@
+function findDuplicates(arr: number[]): number[] {
+  const countMap: { [key: number]: number } = {};
+  const result: number[] = [];
 
-function countNumberAndLetters(input: string): { number: number; letter: number } {
-  let numberCount = 0;
-  let letterCount = 0;
-
-  for (const char of input) {
-    if (char >= '0' && char <= '9') {
-      numberCount++;
-    } else if ((char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z')) {
-      letterCount++;
-    }
+  for (const num of arr) {
+      countMap[num] = (countMap[num] || 0) + 1;
   }
 
-  return { number: numberCount, letter: letterCount };
+  for (const key in countMap) {
+      if (countMap[key] >= 2) {
+          result.push(Number(key));
+      }
+  }
+
+  return result;
 }
 
-// Test misol
-console.log(countNumberAndLetters("string152%\\¥")); 
+console.log(findDuplicates([1, 2, 3, 4, 5, 4, 3, 4])); // Output: [3, 4]
+
+// function countNumberAndLetters(input: string): { number: number; letter: number } {
+//   let numberCount = 0;
+//   let letterCount = 0;
+
+//   for (const char of input) {
+//     if (char >= '0' && char <= '9') {
+//       numberCount++;
+//     } else if ((char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z')) {
+//       letterCount++;
+//     }
+//   }
+
+//   return { number: numberCount, letter: letterCount };
+// }
+
+// // Test misol
+// console.log(countNumberAndLetters("string152%\\¥")); 
 
 // function areParenthesesBalanced(input: string): boolean {
 //   let count = 0;
