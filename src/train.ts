@@ -1,21 +1,43 @@
-function findDuplicates(arr: number[]): number[] {
-  const countMap: { [key: number]: number } = {};
-  const result: number[] = [];
 
-  for (const num of arr) {
-      countMap[num] = (countMap[num] || 0) + 1;
+function singleNumber(nums: number[]): number {
+  const countMap = new Map<number, number>();
+
+  // Har bir elementni sanaymiz
+  for (const num of nums) {
+    countMap.set(num, (countMap.get(num) || 0) + 1);
   }
 
-  for (const key in countMap) {
-      if (countMap[key] >= 2) {
-          result.push(Number(key));
-      }
+  // 1 marta uchragan elementni topamiz
+  for (const [key, value] of countMap) {
+    if (value === 1) {
+      return key;
+    }
   }
 
-  return result;
+  // Agar topilmasa, -1 yoki istalgan qiymat qaytarish mumkin
+  return -1;
 }
 
-console.log(findDuplicates([1, 2, 3, 4, 5, 4, 3, 4])); // Output: [3, 4]
+// Misol uchun:
+console.log(singleNumber([4, 2, 1, 2, 1])); // Natija: 4
+// function findDuplicates(arr: number[]): number[] {
+//   const countMap: { [key: number]: number } = {};
+//   const result: number[] = [];
+
+//   for (const num of arr) {
+//       countMap[num] = (countMap[num] || 0) + 1;
+//   }
+
+//   for (const key in countMap) {
+//       if (countMap[key] >= 2) {
+//           result.push(Number(key));
+//       }
+//   }
+
+//   return result;
+// }
+
+// console.log(findDuplicates([1, 2, 3, 4, 5, 4, 3, 4])); // Output: [3, 4]
 
 // function countNumberAndLetters(input: string): { number: number; letter: number } {
 //   let numberCount = 0;
