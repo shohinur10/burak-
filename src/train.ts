@@ -1,25 +1,43 @@
+function firstUniqueCharIndex(str: string): number {
+  const charCount: Record<string, number> = {};
 
-function singleNumber(nums: number[]): number {
-  const countMap = new Map<number, number>();
-
-  // Har bir elementni sanaymiz
-  for (const num of nums) {
-    countMap.set(num, (countMap.get(num) || 0) + 1);
+  // 1. Harflar sonini sanaymiz
+  for (const char of str) {
+    charCount[char] = (charCount[char] || 0) + 1;
   }
 
-  // 1 marta uchragan elementni topamiz
-  for (const [key, value] of countMap) {
-    if (value === 1) {
-      return key;
+  // 2. Birinchi noyob harfni topamiz
+  for (let i = 0; i < str.length; i++) {
+    if (charCount[str[i]] === 1) {
+      return i;
     }
   }
 
-  // Agar topilmasa, -1 yoki istalgan qiymat qaytarish mumkin
+  // 3. Agar topilmasa
   return -1;
 }
 
+// function singleNumber(nums: number[]): number {
+//   const countMap = new Map<number, number>();
+
+//   // Har bir elementni sanaymiz
+//   for (const num of nums) {
+//     countMap.set(num, (countMap.get(num) || 0) + 1);
+//   }
+
+//   // 1 marta uchragan elementni topamiz
+//   for (const [key, value] of countMap) {
+//     if (value === 1) {
+//       return key;
+//     }
+//   }
+
+//   // Agar topilmasa, -1 yoki istalgan qiymat qaytarish mumkin
+//   return -1;
+// }
+
 // Misol uchun:
-console.log(singleNumber([4, 2, 1, 2, 1])); // Natija: 4
+// console.log(singleNumber([4, 2, 1, 2, 1])); // Natija: 4
 // function findDuplicates(arr: number[]): number[] {
 //   const countMap: { [key: number]: number } = {};
 //   const result: number[] = [];
