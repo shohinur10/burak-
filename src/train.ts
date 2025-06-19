@@ -1,21 +1,41 @@
-function firstUniqueCharIndex(str: string): number {
-  const charCount: Record<string, number> = {};
 
-  // 1. Harflar sonini sanaymiz
-  for (const char of str) {
-    charCount[char] = (charCount[char] || 0) + 1;
+function sumOfUnique(nums: number[]): number {
+  const map = new Map<number, number>();
+
+  // Har bir raqam necha marta uchraganini hisoblaymiz
+  for (const num of nums) {
+    map.set(num, (map.get(num) || 0) + 1);
   }
 
-  // 2. Birinchi noyob harfni topamiz
-  for (let i = 0; i < str.length; i++) {
-    if (charCount[str[i]] === 1) {
-      return i;
+  // Faqat 1 marta uchragan raqamlarni yig'amiz
+  let sum = 0;
+  for (const [key, value] of map.entries()) {
+    if (value === 1) {
+      sum += key;
     }
   }
 
-  // 3. Agar topilmasa
-  return -1;
+  return sum;
 }
+
+console.log(sumOfUnique([1, 2, 3, 2])); // 4 (1 + 3)
+// function firstUniqueCharIndex(str: string): number {
+//   const charCount: Record<string, number> = {};
+
+//   // 1. Harflar sonini sanaymiz
+//   for (const char of str) {
+//     charCount[char] = (charCount[char] || 0) + 1;
+//   }
+
+//   // 2. Birinchi noyob harfni topamiz
+//   for (let i = 0; i < str.length; i++) {
+//     if (charCount[str[i]] === 1) {
+//       return i;
+//     }
+//   }
+
+//   // 3. Agar topilmasa
+//  }
 
 // function singleNumber(nums: number[]): number {
 //   const countMap = new Map<number, number>();
