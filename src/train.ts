@@ -1,24 +1,33 @@
-
-function sumOfUnique(nums: number[]): number {
-  const map = new Map<number, number>();
-
-  // Har bir raqam necha marta uchraganini hisoblaymiz
-  for (const num of nums) {
-    map.set(num, (map.get(num) || 0) + 1);
-  }
-
-  // Faqat 1 marta uchragan raqamlarni yig'amiz
-  let sum = 0;
-  for (const [key, value] of map.entries()) {
-    if (value === 1) {
-      sum += key;
-    }
-  }
-
-  return sum;
+function moveZeroes(nums: number[]): number[] {
+  const nonZeroes = nums.filter(num => num !== 0); // 0 bo'lmaganlarni saqlaymiz
+  const zeroCount = nums.length - nonZeroes.length; // nechta 0 borligini aniqlaymiz
+  const zeroes = Array(zeroCount).fill(0); // shuncha 0 yaratamiz
+  return [...nonZeroes, ...zeroes]; // birlashtiramiz
 }
 
-console.log(sumOfUnique([1, 2, 3, 2])); // 4 (1 + 3)
+// Test
+console.log(moveZeroes([0, 1, 0, 3, 12])); // [1, 3, 12, 0, 0]
+
+// function sumOfUnique(nums: number[]): number {
+//   const map = new Map<number, number>();
+
+//   // Har bir raqam necha marta uchraganini hisoblaymiz
+//   for (const num of nums) {
+//     map.set(num, (map.get(num) || 0) + 1);
+//   }
+
+//   // Faqat 1 marta uchragan raqamlarni yig'amiz
+//   let sum = 0;
+//   for (const [key, value] of map.entries()) {
+//     if (value === 1) {
+//       sum += key;
+//     }
+//   }
+
+//   return sum;
+// }
+
+// console.log(sumOfUnique([1, 2, 3, 2])); // 4 (1 + 3)
 // function firstUniqueCharIndex(str: string): number {
 //   const charCount: Record<string, number> = {};
 
