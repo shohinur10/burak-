@@ -1,12 +1,47 @@
-function moveZeroes(nums: number[]): number[] {
-  const nonZeroes = nums.filter(num => num !== 0); // 0 bo'lmaganlarni saqlaymiz
-  const zeroCount = nums.length - nonZeroes.length; // nechta 0 borligini aniqlaymiz
-  const zeroes = Array(zeroCount).fill(0); // shuncha 0 yaratamiz
-  return [...nonZeroes, ...zeroes]; // birlashtiramiz
+type AnyObject = { [key: string]: any };
+
+function groupedBy(arr: AnyObject[], key: string): Record<string, AnyObject[]> {
+	const grouped: Record<string, AnyObject[]> = {};
+
+	for (const item of arr) {
+		const groupKey = String(item[key]);
+
+		if (!grouped[groupKey]) {
+			grouped[groupKey] = [];
+		}
+
+		grouped[groupKey].push(item);
+	}
+
+	return grouped;
 }
 
-// Test
-console.log(moveZeroes([0, 1, 0, 3, 12])); // [1, 3, 12, 0, 0]
+// Misol uchun data
+const data = [
+	{ name: "Alice", age: 30, city: "New York" },
+	{ name: "Bob", age: 25, city: "London" },
+	{ name: "Charlie", age: 30, city: "Paris" },
+	{ name: "David", age: 25, city: "Berlin" },
+	{ name: "Eve", age: 40, city: "Tokyo" }
+];
+
+// Funksiyani chaqiramiz
+const result = groupedBy(data, 'age');
+
+// Natijani ko‘rsatamiz
+console.log(result);
+
+
+
+// function moveZeroes(nums: number[]): number[] {
+//   const nonZeroes = nums.filter(num => num !== 0); // 0 bo'lmaganlarni saqlaymiz
+//   const zeroCount = nums.length - nonZeroes.length; // nechta 0 borligini aniqlaymiz
+//   const zeroes = Array(zeroCount).fill(0); // shuncha 0 yaratamiz
+//   return [...nonZeroes, ...zeroes]; // birlashtiramiz
+// }
+
+// // Test
+// console.log(moveZeroes([0, 1, 0, 3, 12])); // [1, 3, 12, 0, 0]
 
 // function sumOfUnique(nums: number[]): number {
 //   const map = new Map<number, number>();
