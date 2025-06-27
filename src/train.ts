@@ -1,35 +1,49 @@
-type AnyObject = { [key: string]: any };
+function checkArray(arr: (string | number)[]): boolean {
+	const hasNumber = arr.some(item => typeof item === 'number');
+	const hasString = arr.some(item => typeof item === 'string');
+	return hasNumber && hasString;
+  }
+  
+  // Testlar:
+  console.log(checkArray(['hello', 123, 'world'])); // true
+  console.log(checkArray(['hello', '123', 'world'])); // false
+  console.log(checkArray([123, 456])); // false
+  console.log(checkArray(['abc', 'def'])); // false
+  
 
-function groupedBy(arr: AnyObject[], key: string): Record<string, AnyObject[]> {
-	const grouped: Record<string, AnyObject[]> = {};
 
-	for (const item of arr) {
-		const groupKey = String(item[key]);
+// type AnyObject = { [key: string]: any };
 
-		if (!grouped[groupKey]) {
-			grouped[groupKey] = [];
-		}
+// function groupedBy(arr: AnyObject[], key: string): Record<string, AnyObject[]> {
+// 	const grouped: Record<string, AnyObject[]> = {};
 
-		grouped[groupKey].push(item);
-	}
+// 	for (const item of arr) {
+// 		const groupKey = String(item[key]);
 
-	return grouped;
-}
+// 		if (!grouped[groupKey]) {
+// 			grouped[groupKey] = [];
+// 		}
 
-// Misol uchun data
-const data = [
-	{ name: "Alice", age: 30, city: "New York" },
-	{ name: "Bob", age: 25, city: "London" },
-	{ name: "Charlie", age: 30, city: "Paris" },
-	{ name: "David", age: 25, city: "Berlin" },
-	{ name: "Eve", age: 40, city: "Tokyo" }
-];
+// 		grouped[groupKey].push(item);
+// 	}
 
-// Funksiyani chaqiramiz
-const result = groupedBy(data, 'age');
+// 	return grouped;
+// }
 
-// Natijani ko‘rsatamiz
-console.log(result);
+// // Misol uchun data
+// const data = [
+// 	{ name: "Alice", age: 30, city: "New York" },
+// 	{ name: "Bob", age: 25, city: "London" },
+// 	{ name: "Charlie", age: 30, city: "Paris" },
+// 	{ name: "David", age: 25, city: "Berlin" },
+// 	{ name: "Eve", age: 40, city: "Tokyo" }
+// ];
+
+// // Funksiyani chaqiramiz
+// const result = groupedBy(data, 'age');
+
+// // Natijani ko‘rsatamiz
+// console.log(result);
 
 
 
